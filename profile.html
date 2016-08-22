@@ -1,0 +1,123 @@
+<?php
+include 'access_control.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  <meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <title>Profile</title>
+
+	  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	  <link rel="stylesheet" href="/Website/styles/main.css">
+
+	  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	  <script src="/Website/scripts/controller.js"></script>
+  </head>
+  <body>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+				    <a class="navbar-brand" href="home.html" >Campus Connection</a>
+					<a href="message.html"><i class="glyphicon glyphicon-envelope"><span class="badge">2</span></i></a>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/Website/home/">Home</a></li>
+						<li><a href="/Website/profile/">Profile</a></li>
+						<li><a href="#">Inbox <span class="badge">2</span></a></li>
+						<li><a href="/Website/search/">Search</a></li>
+						<li><a href="#">Settings</a></li>
+						<li><a href="#">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav> 
+		<!-- End Nav Bar-->
+		
+		<!-- Profile-->
+	<div class="container">
+	<div class="wrapper">
+            <div class="row">
+                <div class="col-md-3 col-sm-3">  
+                    <div class="user-wrapper">
+                        <img src="assets/img/1.jpg" class="img-responsive" /> 
+				
+                    <div class="description">
+                       <h4>Name</h4>
+                        <h5> <strong>Eastern Michigan University</strong></h5> 
+                        <a href="#" class="btn btn-danger btn-sm">&nbsp;Message</a> 
+						<hr />
+						<h3>Details</h3>
+						<div id="profile_page_details">
+							<li><span class="details_field">Status </span><span class="details_value">-</span></li>
+							<li><span class="details_field">Major </span><span class="details_value">-</span></li>
+							<li><span class="details_field">Minor </span><span class="details_value">-</span></li>
+							<li><span class="details_field">City </span><span class="details_value">-</span></li>
+							<li><span class="details_field">Age </span><span class="details_value">-</span></li>
+							<li><span class="details_field">Height </span><span class="details_value">-</span></li>
+							<li><span class="details_field">Body Type </span><span class="details_value">-</span></li>
+							<li><span class="details_field">Ethnicity </span><span class="details_value">-</span></li>
+							<li><span class="details_field">Intent </span><span class="details_value">-</span></li>
+							<li><span class="details_field">Interested In </span><span class="details_value">-</span></li>
+						</div>
+                    </div>
+                     </div>
+                </div>
+                
+                <div class="col-md-9 col-sm-9  user-wrapper">
+                    <div class="description">
+                         <h3>About</h3>
+                    <hr />
+                     <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                          Aliquam suscipit egestas eros, ut maximus magna blandit ut. 
+                         Suspendisse vel molestie sapien.
+                          Interdum et malesuada fames ac ante ipsum primis in faucibus. 
+                         Fusce sit amet egestas dui, vitae tincidunt justo. 
+                         </p>
+                    <p>
+                         Etiam eleifend massa congue magna pretium, id blandit dui pulvinar. 
+                         Nam et pulvinar risus, vel blandit risus.
+                          Maecenas tristique volutpat ante, aliquet hendrerit felis aliquet nec.
+                          Curabitur rutrum tincidunt erat, ac feugiat libero gravida ac. 
+                         Suspendisse ut varius quam, vitae rutrum metus. 
+                        </p>   
+						
+					    <h3>Interests</h3>
+					<hr />
+						<div id="profile-interests">
+						<ul class="nav">
+							<li class="text-lg"><a href="/interests/hiking.aspx">Hiking</a></li>
+							<li class="text-lg"><a href="/interests/reading.aspx">Reading</a></li>
+							<li class="text-lg"><a href="/interests/camping.aspx">Camping</a></li>
+							<li class="text-lg"><a href="/interests/msu_sports.aspx">MSU sports</a></li>
+							<li class="text-lg"><a href="/interests/soccer.aspx">Soccer</a></li>
+							<li class="text-lg"><a href="/interests/running.aspx">Running</a></li>
+							<li class="text-lg"><a href="/interests/autumn.aspx">Autumn</a></li>
+						</ul>
+						
+						</div>
+        
+                    </div>
+                 
+                </div>
+            </div>
+	</div>			
+	<footer>
+			<p>&copy; 2015 Company, Inc.</p>
+	</footer>		
+    </div>
+  </body>
+</html>
