@@ -1,5 +1,5 @@
 // The root URL for the RESTful services
-var rootURL = "http://192.168.101.111:8080/CCService/v1/index.php";
+var rootURL = "http://75.128.92.169:8080/CCService/v1/index.php";
 
 // Register listeners
 //login form
