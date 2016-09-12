@@ -1,8 +1,15 @@
 // The root URL for the RESTful services
 var rootURL = "http://75.128.92.169:8080/CCService/v1/index.php";
 
-// Register listeners
-//login form
+// Check for .edu email
+function emailCheck(email){
+	if (email.includes("@") && email.endsWith(".edu")){
+		return true;
+	}
+	return false;
+}
+
+// Login form listener
 $(function() {
 	$('#loginForm').submit(function (e) {
 		e.preventDefault();
@@ -18,40 +25,7 @@ $(function() {
 	});
 });
 
-//register form
-$(function() {
-	$('#registerForm').submit(function(e) {
-		e.preventDefault();
-		console.log('form submitted');
-		var email = document.getElementById("registerEmail").value;
-		var validEmail = emailCheck(email);
-		if (!validEmail){
-			register();
-		} else {
-			$('#registerEmail').effect( "shake", {times:4}, 1000 );
-			$("#error").html("Invalid email address");
-		}
-	});
-});
-
-//sign up form
-$(function() {
-	$('#signUpForm').submit(function(e) {
-		e.preventDefault();
-		console.log('form submitted');
-		signUp ();
-	});
-});
-
-// Check for .edu email
-function emailCheck(email){
-	if (email.includes("@") && email.endsWith(".edu")){
-		return true;
-	}
-	return false;
-}
-
-// Login callback to API 
+// Login callback to API
 function logIn(){
 	console.log('login');
 	$.ajax({
@@ -73,13 +47,29 @@ function logIn(){
 	});
 }
 
-// Serialize login form fields into a JSON string
+// Login form to a JSON
 function loginFormToJSON() {
 	return JSON.stringify({
-		"email": $('#loginEmail').val(), 
+		"email": $('#loginEmail').val(),
 		"password": $('#loginPassword').val()
 	});
 }
+
+// Register form listener
+$(function() {
+	$('#registerForm').submit(function(e) {
+		e.preventDefault();
+		console.log('form submitted');
+		var email = document.getElementById("registerEmail").value;
+		var validEmail = emailCheck(email);
+		if (!validEmail){
+			register();
+		} else {
+			$('#registerEmail').effect( "shake", {times:4}, 1000 );
+			$("#error").html("Invalid email address");
+		}
+	});
+});
 
 // Register callback to API
 function register(){
@@ -101,16 +91,25 @@ function register(){
 				$("#error").html(data.message);
 				$("#success").html("");
 			}
-		}		
+		}
 	});
 }
 
-// Serialize register form fields into a JSON string
+// Register form to a JSON
 function registerFormToJSON() {
 	return JSON.stringify({
 		"email": $('#registerEmail').val()
 	});
 }
+
+// Sign up form listener
+$(function() {
+	$('#signUpForm').submit(function(e) {
+		e.preventDefault();
+		console.log('form submitted');
+		signUp ();
+	});
+});
 
 // Sign up callback to API
 function signUp (){
@@ -131,23 +130,10 @@ function signUp (){
 				console.log('error');
 				$("#error").html(data.message);
 			}
-		}		
+		}
 	});
 }
-
-function getCode(str){
-	return str.split('/')[5];
-}
-
-function getDob() {
-	var month = $("#month").val();
-	var day = $("#day").val();
-	var year = $("#year").val();
-
-	return (year + "/" + month + "/" + day);
-}
-
-// Serialize sign up form fields into a JSON string
+// Sign up form to JSON
 function signUpFormToJSON() {
 	return JSON.stringify({
 		"code": getCode(window.location.href),
@@ -162,4 +148,16 @@ function signUpFormToJSON() {
 		"dob": getDob(),
 		"gender": $('input[name=gender]:checked').val()
 	});
+}
+// Sign up form helpers
+function getCode(str){
+	return str.split('/')[5];
+}
+
+function getDob() {
+	var month = $("#month").val();
+	var day = $("#day").val();
+	var year = $("#year").val();
+
+	return (year + "/" + month + "/" + day);
 }

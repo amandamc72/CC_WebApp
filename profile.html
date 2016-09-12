@@ -85,17 +85,16 @@ include 'access_control.php';
 					<hr />
 						<div id="profile-courses">
 							<ul class="nav" data-bind="foreach: courses">
-								<li class="text-lg" data-bind="text: course"></li>
+								<li class="text-lg" data-bind="text: courseName"></li>
 							</ul>
 						</div>
 							
 					<h3>Interests</h3>
 					<hr />
 						<div id="profile-interests">
-						<ul class="nav" data-bind="foreach: interests">
-							<li class="text-lg"><a href="/interests/reading/" data-bind="text: interest"></a></li>
-						</ul>
-						
+                            <ul class="nav" data-bind="foreach: interests">
+                                <li class="text-lg"><a data-bind="attr: { href: interestLink }" data-bind="text: interestDescription"></a></li>
+                            </ul>
 						</div>
         
                     </div>
