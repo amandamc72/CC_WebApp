@@ -93,7 +93,7 @@ include 'access_control.php';
 					<hr />
 						<div id="profile-interests">
                             <ul class="nav" data-bind="foreach: interests">
-                                <li class="text-lg"><a data-bind="attr: { href: interestLink }" data-bind="text: interestDescription"></a></li>
+                                <li class="text-lg"><a data-bind="attr: { href: interestLink, title: interestDescription }, text: interestDescription"></a></li>
                             </ul>
 						</div>
         
