@@ -1,12 +1,16 @@
 var profile = {
+
+	thumbnail:"/Website/assets/img/1.jpg",
+
 	picture:[
 	{
-		relPath:"/Website/assets/img/2.jpg",
-		isDefault:"0"
+		relPath:"/Website/assets/img/2.jpg"
 	},
 	{
-		relPath:"/Website/assets/img/1.jpg",
-		isDefault:"1"
+		relPath:"/Website/assets/img/3.jpg"
+	},
+	{
+		relPath:"/Website/assets/img/4.jpg"
 	}
 ],
 	name:"Amanda McCarty",
@@ -55,6 +59,7 @@ var profile = {
 //properties that are observable
 var profileVM = function(){
 	var self = this;
+	self.thumbnail = ko.observable();
 	self.picture = ko.observableArray();
 	self.name = ko.observable();
 	self.city = ko.observable();
@@ -71,7 +76,8 @@ var profileVM = function(){
 
 $(function () {
         var profileVMObject = new profileVM();
-        profileVMObject.picture(profile.picture)
+        profileVMObject.thumbnail(profile.thumbnail)
+					  .picture(profile.picture)
                       .name(profile.name)
                       .city(profile.city)
                       .state(profile.state)
