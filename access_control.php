@@ -1,7 +1,6 @@
 <?php
-if(!isset($_SESSION['login_user'])) {
+if(!isset($_SESSION['data'])) {
 	
 	header("Location: login");
 	die();
 }
-?>

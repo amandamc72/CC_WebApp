@@ -38,6 +38,18 @@ function logIn(){
 			console.log(data);
 			if(!data.error) {
 				//TODO log in to session
+				$.ajax({
+					type : 'POST',
+					url : '/Website/session.php',
+					dataType: "json",
+					data: data.id,
+					success : function(data){
+						console.log(data);
+					},
+					error : function(){
+						console.log("Error");
+					}
+				});
 				window.location.href = "/Website/home/";
 			} else {
 				$('#loginPassword').effect( "shake", {times:4}, 1000 );
@@ -160,4 +172,24 @@ function getDob() {
 	var year = $("#year").val();
 
 	return (year + "/" + month + "/" + day);
+}
+
+// Profile population callback to API
+function profilePopulation(id){
+	console.log('Profile Pop');
+	$.ajax({
+		type: "POST",
+		contentType: 'application/json',
+		url: rootURL + '/profile/' + id,
+		dataType: "json",
+		success: function(data){
+			console.log(data);
+			if(!data.error) {
+				console.log('success');
+				profile = data;
+			} else {
+				console.log('error profile not found');
+			}
+		}
+	});
 }
