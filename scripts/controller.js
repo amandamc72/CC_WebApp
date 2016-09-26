@@ -136,7 +136,6 @@ function signUp (){
 			console.log(data);
 			if(!data.error) {
 				console.log('success');
-				//TODO log in to session
 				window.location.href = "/Website/home/";
 			} else {
 				console.log('error');
@@ -174,19 +173,51 @@ function getDob() {
 	return (year + "/" + month + "/" + day);
 }
 
+// profile properties that are observable
+var profileVM = function(){
+	var self = this;
+	self.thumbnail = ko.observable();
+	self.picture = ko.observableArray();
+	self.name = ko.observable();
+	self.city = ko.observable();
+	self.state = ko.observable();
+	self.school = ko.observable();
+	self.standing = ko.observable();
+	self.major = ko.observable();
+	self.minor = ko.observable();
+	self.age = ko.observable();
+	self.about = ko.observable();
+	self.courses = ko.observableArray();
+	self.interests = ko.observableArray();
+}
+
 // Profile population callback to API
 function profilePopulation(id){
 	console.log('Profile Pop');
 	$.ajax({
-		type: "POST",
+		type: "GET",
 		contentType: 'application/json',
 		url: rootURL + '/profile/' + id,
 		dataType: "json",
 		success: function(data){
-			console.log(data);
 			if(!data.error) {
-				console.log('success');
-				profile = data;
+				$(function () {
+					var profileVMObject = new profileVM();
+					profileVMObject.thumbnail(data.thumbnail)
+						.picture(data.picture)
+						.name(data.name)
+						.city(data.city)
+						.state(data.state)
+						.school(data.school)
+						.standing(data.standing)
+						.major(data.major)
+						.minor(data.minor)
+						.age(data.age)
+						.about(data.about)
+						.courses(data.courses)
+						.interests(data.interests);
+					ko.applyBindings(profileVMObject);
+				});
 			} else {
 				console.log('error profile not found');
 			}
