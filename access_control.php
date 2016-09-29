@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION['data'])) {
+if(!isset($_SESSION['id'])) {
 	
-	header("Location: login");
+	header("Location: login.html");
 	die();
 }
