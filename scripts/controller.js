@@ -36,20 +36,7 @@ function logIn(){
 		data: loginFormToJSON(),
 		success: function(data){
 			console.log(data);
-			if(!data.error) {
-				//TODO log in to session
-				$.ajax({
-					type : 'POST',
-					url : '/Website/session.php',
-					dataType: "json",
-					data: data.id,
-					success : function(data){
-						console.log(data);
-					},
-					error : function(){
-						console.log("Error");
-					}
-				});
+			if(!data.error) {				
 				window.location.href = "/Website/home/";
 			} else {
 				$('#loginPassword').effect( "shake", {times:4}, 1000 );
@@ -173,7 +160,7 @@ function getDob() {
 	return (year + "/" + month + "/" + day);
 }
 
-// profile properties that are observable
+// Profile properties that are observable
 var profileVM = function(){
 	var self = this;
 	self.thumbnail = ko.observable();
@@ -224,3 +211,38 @@ function profilePopulation(id){
 		}
 	});
 }
+
+// Logout callback to API
+function logOut(){
+	console.log('log out');
+	$.ajax({
+		type: "GET",
+		contentType: 'application/json',
+		url: rootURL + '/logout',
+		dataType: "json",
+		success: function(data){
+			console.log(data.message);
+		}
+	})
+}
+
+// Session callback to API
+function whoIs(){
+	console.log('Who am i?');
+	$.ajax({
+		type: "GET",
+		contentType: 'application/json',
+		url: rootURL + '/member',
+		dataType: "json",
+		success: function(data){
+			if (!data.error){
+				console.log(data.id);
+				profilePopulation(data.id);
+			}
+			else{
+				console.log("You are not logged in");
+			}		
+		}
+	})
+}
+
