@@ -1,3 +1,6 @@
+AddHandler x-httpd-php .html .htm
+AddHandler php5-script .php .html .htm
+
 RewriteEngine on
 
 RewriteRule ^signup/([a-zA-Z0-9_-]+)$ signup.html?code=$1

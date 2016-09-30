@@ -236,8 +236,8 @@ function whoIs(){
 		dataType: "json",
 		success: function(data){
 			if (!data.error){
-				console.log(data.id);
-				profilePopulation(data.id);
+				console.log(data.id.memberId);
+				profilePopulation(data.id.memberId);
 			}
 			else{
 				console.log("You are not logged in");

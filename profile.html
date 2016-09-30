@@ -1,3 +1,6 @@
+<?php
+include 'access_control.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,7 +22,7 @@
 
     <script src="/Website/scripts/libs/knockout-3.4.0.js"></script>
     <script src="/Website/scripts/controller.js"></script>
-    <script src="/Website/scripts/profileViewModel.js"></script>
+
     <script type="text/javascript">
       window.onload = function() {
         whoIs();
@@ -46,7 +49,7 @@
             <li><a href="#">Inbox <span class="badge">2</span></a></li>
             <li><a href="/Website/search/">Search</a></li>
             <li><a href="#">Settings</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="javascript:logOut();">Logout</a></li>
           </ul>
         </div>
       </div>
