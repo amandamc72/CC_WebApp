@@ -3,7 +3,9 @@ var rootURL = "http://75.128.92.169:8080/CCService/v1/index.php";
 
 // Check for .edu email
 function emailCheck(email){
-	if (email.includes("@") && email.endsWith(".edu")){
+	//TODO toook out email check for testing
+	//if (email.includes("@") && email.endsWith(".edu")){
+	if (email.includes("@")){
 		return true;
 	}
 	return false;
@@ -61,7 +63,7 @@ $(function() {
 		console.log('form submitted');
 		var email = document.getElementById("registerEmail").value;
 		var validEmail = emailCheck(email);
-		if (!validEmail){
+		if (validEmail){
 			register();
 		} else {
 			$('#registerEmail').effect( "shake", {times:4}, 1000 );
