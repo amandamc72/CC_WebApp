@@ -182,14 +182,18 @@ include 'access_control.php';
               <li class="text-lg"><a data-bind="attr: { href: interestLink, title: interestDescription }, text: interestDescription"></a></li>
             </ul>
           </div>
-          <div class="edit" id="profile_interests_edit">
-            <button id="add_btn" class="btn btn-info btn-sm">Add</button>
-            <ul class="nav">
-              <li class="text-lg"><input type="text" class="edit form-control" data-bind="textInput: interestDescription"></li>
-            </ul>
-
-
-          </div>
+         <div class="edit" id="profile_interests_edit">         
+          <form class="form-control" data-bind="submit: addInterest">
+            <input data-bind="value: newInterestText" placeholder="Add Interest" />
+            <button type="submit" id="add_btn" class="btn btn-info btn-sm">Add</button>
+          </form>
+          <ul class="nav" data-bind="foreach: interests, visible: interests().length > 0">
+            <li class="text-lg">		
+              <input type="text" class="edit form-control" data-bind="value: interestDescription" />
+              <a href="#" data-bind="click: $parent.removeInterest">Delete</a>
+            </li>
+          </ul>
+        </div>
         </div>
       </div>
     </div>
