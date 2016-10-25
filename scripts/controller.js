@@ -248,3 +248,23 @@ function whoIs(){
 	})
 }
 
+//For update interest data binding
+function Interest(data) {
+    this.interestDescription= ko.observable(data.interestDescription);
+}
+
+function InterestsUpdateViewModel() {
+    // Data
+    var self = this;
+    self.interests = ko.observableArray([]);
+    self.newInterestText = ko.observable();
+
+    // Operations
+    self.addInterest = function() {
+        self.interests.push(new Interest({ title: this.newInterestText() }));
+        self.newInterestText("");
+    };
+    self.removeInterest= function(interest) { self.interests.remove(interest) };
+}
+
+ko.applyBindings(new InterestsUpdateViewModel());
