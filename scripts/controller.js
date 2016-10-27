@@ -250,44 +250,23 @@ function whoIs(){
 
 //For update interest data binding
 function Interest(data) {
-    this.interestDescription = ko.observable(data.interestDescription);
+  this.interestTitle = ko.observable(data.interestTitle);
 }
 
-/*function InterestsUpdateViewModel() {
-    // Data
-    var self = this;
-    self.interests = ko.observableArray([]);
-    self.newInterestText = ko.observable();
+function InterestUpdateViewModel() {
+  var self = this;
+  self.interests = ko.observableArray([]);
+  self.newInterestText = ko.observable();
 
-    // Operations
-    self.addInterest = function() {
-        self.interests.push(new Interest({ interestDescription: this.newInterestText() }));
-        self.newInterestText("");
-    };
-    self.removeInterest= function(interest) { self.interests.remove(interest) };
+  self.addInterest = function() {
+    self.interests.push(new Interest({interestTitle: this.newInterestText()}));
+    self.newInterestText("");
+  };
+  
+  self.removeInterest = function(interest) {self.interests.remove(interest)};
+ 
 }
 
-ko.applyBindings(new InterestsUpdateViewModel());*/
-function Task(data) {
-    this.title = ko.observable(data.title);
-    this.isDone = ko.observable(data.isDone);
-}
-
-function TaskListViewModel() {
-    // Data
-    var self = this;
-    self.tasks = ko.observableArray([]);
-    self.newTaskText = ko.observable();
-    self.incompleteTasks = ko.computed(function() {
-        return ko.utils.arrayFilter(self.tasks(), function(task) { return !task.isDone() });
-    });
-
-    // Operations
-    self.addTask = function() {
-        self.tasks.push(new Task({ title: this.newTaskText() }));
-        self.newTaskText("");
-    };
-    self.removeTask = function(task) { self.tasks.remove(task) };
-}
-
-ko.applyBindings(new TaskListViewModel());
+$(function () {
+	ko.applyBindings(new InterestUpdateViewModel());
+});
