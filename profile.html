@@ -181,32 +181,16 @@ include 'access_control.php';
             </ul>
           </div>
          <div class="edit" id="profile_interests_edit">
-           <h3>Tasks</h3>
-          <form data-bind="submit: addTask">
-              Add task: <input data-bind="value: newTaskText" placeholder="What needs to be done?" />
-              <button type="submit">Add</button>
-          </form>
-
-          <ul data-bind="foreach: tasks, visible: tasks().length > 0">
-              <li>
-                  <input type="checkbox" data-bind="checked: isDone" />
-                  <input data-bind="value: title, disable: isDone" />
-                  <a href="#" data-bind="click: $parent.removeTask">Delete</a>
-              </li> 
-          </ul>
-
-          You have <b data-bind="text: incompleteTasks().length">&nbsp;</b> incomplete task(s)
-          <span data-bind="visible: incompleteTasks().length == 0"> - it's beer time!</span>
-          <!--<form class="form-control" data-bind="submit: addInterest">
-            <input data-bind="value: newInterestText" placeholder="Add Interest" />
-            <button type="submit" id="add_btn" class="btn btn-info btn-sm">Add</button>
-          </form>
-          <ul class="nav" data-bind="foreach: interests, visible: interests().length > 0">
-            <li class="text-lg">		
-              <input type="text" class="edit form-control" data-bind="value: interestDescription" />
-              <a href="#" data-bind="click: $parent.removeInterest">Delete</a>
-            </li>
-          </ul>-->
+          <form data-bind="submit: addInterest">
+          <input type="text" class="edit form-control" data-bind="value: newInterestText" placeholder="New Interest" />
+          <button type="submit" class="btn btn-info btn-sm">Add</button>
+        </form>
+        <ul class="nav" data-bind="foreach: interests, visible: interests().length > 0">
+          <li class="text-lg">
+            <input type="text" class="edit form-control" data-bind="value: interestTitle" />
+            <a href="#" data-bind="click: $parent.removeInterest">Delete</a>
+          </li>
+        </ul>
         </div>
         </div>
       </div>
