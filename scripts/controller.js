@@ -250,7 +250,7 @@ function whoIs(){
 
 //For update interest data binding
 function Interest(data) {
-    this.interestDescription= ko.observable(data.interestDescription);
+    this.interestDescription = ko.observable(data.interestDescription);
 }
 
 function InterestsUpdateViewModel() {
@@ -261,7 +261,7 @@ function InterestsUpdateViewModel() {
 
     // Operations
     self.addInterest = function() {
-        self.interests.push(new Interest({ title: this.newInterestText() }));
+        self.interests.push(new Interest({ interestDescription: this.newInterestText() }));
         self.newInterestText("");
     };
     self.removeInterest= function(interest) { self.interests.remove(interest) };
