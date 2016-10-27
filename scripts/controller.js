@@ -57,19 +57,17 @@ function loginFormToJSON() {
 }
 
 // Register form listener
-$(function() {
-	$('#registerForm').submit(function(e) {
-		e.preventDefault();
-		console.log('form submitted');
-		var email = document.getElementById("registerEmail").value;
-		var validEmail = emailCheck(email);
-		if (validEmail){
-			register();
-		} else {
-			$('#registerEmail').effect( "shake", {times:4}, 1000 );
-			$("#error").html("Invalid email address");
-		}
-	});
+$('#registerForm').submit(function(e) {
+	e.preventDefault();
+	console.log('form submitted');
+	var email = document.getElementById("registerEmail").value;
+	var validEmail = emailCheck(email);
+	if (validEmail){
+		register();
+	} else {
+		$('#registerEmail').effect( "shake", {times:4}, 1000 );
+		$("#error").html("Invalid email address");
+	}
 });
 
 // Register callback to API
