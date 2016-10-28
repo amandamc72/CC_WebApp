@@ -180,12 +180,15 @@ function profileVM(data){
 	self.interests = ko.observableArray(data.interests);
 
 	self.newInterestText = ko.observable();
-
+	
 	self.addInterest = function() {
-		self.interests.push(this.newInterestText);
-		self.newInterestText("");
+		self.interests.push({
+			interestDescription: this.newInterestText,
+			interestLink: "/Website/search/"+this.newInterestText.toLowerCase()+"/";
+		});
+	self.newInterestText("");
 	};
-
+	
 	self.removeInterest = function(interest) {self.interests.remove(interest)};
 
 };
