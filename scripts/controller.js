@@ -163,21 +163,38 @@ function getDob() {
 }
 
 // Profile properties that are observable
-var profileVM = function(){
+function profileVM(data){
 	var self = this;
-	self.thumbnail = ko.observable();
-	self.picture = ko.observableArray();
-	self.name = ko.observable();
-	self.city = ko.observable();
-	self.state = ko.observable();
-	self.school = ko.observable();
-	self.standing = ko.observable();
-	self.major = ko.observable();
-	self.minor = ko.observable();
-	self.age = ko.observable();
-	self.about = ko.observable();
-	self.courses = ko.observableArray();
-	self.interests = ko.observableArray();
+	self.thumbnail = ko.observable(data.thumbnail);
+	self.picture = ko.observableArray(data.picture);
+	self.name = ko.observable(data.name);
+	self.city = ko.observable(data.city);
+	self.state = ko.observable(data.state);
+	self.school = ko.observable(data.school);
+	self.standing = ko.observable(data.standing);
+	self.major = ko.observable(data.major);
+	self.minor = ko.observable(data.minor);
+	self.age = ko.observable(data.age);
+	self.about = ko.observable(data.about);
+	self.courses = ko.observableArray(data.courses);
+	self.interests = ko.observableArray(data.interests);
+
+	self.newInterestText = ko.observable();
+
+	self.addInterest = function() {
+		self.interests.push(this.newInterestText);
+		self.newInterestText("");
+	};
+
+	self.removeInterest = function(interest) {self.interests.remove(interest)};
+
+};
+var profileVMObject;
+
+function profileVMBind(data) {
+	$(function () {
+		ko.applyBindings(new profileVM(data));
+	});
 }
 
 // Profile population callback to API
@@ -190,23 +207,8 @@ function profilePopulation(id){
 		dataType: "json",
 		success: function(data){
 			if(!data.error) {
-				$(function () {
-					var profileVMObject = new profileVM();
-					profileVMObject.thumbnail(data.thumbnail)
-						.picture(data.picture)
-						.name(data.name)
-						.city(data.city)
-						.state(data.state)
-						.school(data.school)
-						.standing(data.standing)
-						.major(data.major)
-						.minor(data.minor)
-						.age(data.age)
-						.about(data.about)
-						.courses(data.courses)
-						.interests(data.interests);
-					ko.applyBindings(profileVMObject);
-				});
+				console.log(data);
+				profileVMBind(data);
 			} else {
 				console.log('error profile not found');
 			}
@@ -247,26 +249,3 @@ function whoIs(){
 		}
 	})
 }
-
-//For update interest data binding
-function Interest(data) {
-  this.interestTitle = ko.observable(data.interestTitle);
-}
-
-function InterestUpdateViewModel() {
-  var self = this;
-  self.interests = ko.observableArray([]);
-  self.newInterestText = ko.observable();
-
-  self.addInterest = function() {
-    self.interests.push(new Interest({interestTitle: this.newInterestText()}));
-    self.newInterestText("");
-  };
-  
-  self.removeInterest = function(interest) {self.interests.remove(interest)};
- 
-}
-
-$(function () {
-	ko.applyBindings(new InterestUpdateViewModel());
-});

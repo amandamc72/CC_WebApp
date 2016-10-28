@@ -164,12 +164,7 @@ include 'access_control.php';
             </ul>
           </div>
           <div class="edit" id="profile_courses_edit">
-            <ul class="nav">
-              <li class="text-lg"><input type="text" class="edit form-control" data-bind="textInput: courseName"></li>
-              <li class="text-lg"><input type="text" class="edit form-control" data-bind="textInput: courseName"></li>
-              <li class="text-lg"><input type="text" class="edit form-control" data-bind="textInput: courseName"></li>
-              <li class="text-lg"><input type="text" class="edit form-control" data-bind="textInput: courseName"></li>
-              <li class="text-lg"><input type="text" class="edit form-control" data-bind="textInput: courseName"></li>
+            <ul class="nav" data-bind="foreach: courses">
               <li class="text-lg"><input type="text" class="edit form-control" data-bind="textInput: courseName"></li>
             </ul>
           </div>
@@ -187,7 +182,7 @@ include 'access_control.php';
         </form>
         <ul class="nav" data-bind="foreach: interests, visible: interests().length > 0">
           <li class="text-lg">
-            <input type="text" class="edit form-control" data-bind="value: interestTitle" />
+            <input type="text" class="edit form-control" data-bind="value: interestDescription" />
             <a href="#" data-bind="click: $parent.removeInterest">Delete</a>
           </li>
         </ul>
