@@ -184,7 +184,7 @@ function profileVM(data){
 	self.addInterest = function() {
 		self.interests.push({
 			interestDescription: this.newInterestText,
-			interestLink: "/Website/search/"+this.newInterestText.toLowerCase()+"/";
+			interestLink: "/Website/search/"+this.newInterestText.toString().toLowerCase()+"/"
 		});
 	self.newInterestText("");
 	};
@@ -192,7 +192,6 @@ function profileVM(data){
 	self.removeInterest = function(interest) {self.interests.remove(interest)};
 
 };
-var profileVMObject;
 
 function profileVMBind(data) {
 	$(function () {
