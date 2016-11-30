@@ -184,7 +184,7 @@ function profileVM(data){
 	self.addInterest = function() {
 		self.interests.push({
 			interestDescription: this.newInterestText,
-			interestLink: "/Website/search/"+this.newInterestText.toLowerCase()+"/";
+			interestLink: "/Website/search/"+this.newInterestText.toString().toLowerCase()+"/"
 		});
 	self.newInterestText("");
 	};

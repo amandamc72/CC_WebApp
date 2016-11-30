@@ -117,9 +117,99 @@ include 'access_control.php';
             <img data-bind="attr:{src: thumbnail}" alt="Profile Thumbnail" class="img-responsive" />
           </a>
           <div id="links" data-bind="foreach: picture">
-            <a data-bind="attr: { href: relPath}" data-gallery></a>
+            <div data-bind="if: relPath != 'http://placehold.it/150x150'">
+              <a data-bind="attr: { href: relPath}" data-gallery></a>
+            </div>
           </div>
           <!-- End Profile Image Links -->
+
+          <!-- Image upload modal button -->
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#uploadWidget">Edit Pictures</button>
+
+          <!-- Modal -->
+          <div id="uploadWidget" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Edit Pictures</h4>
+                </div>
+                <div class="modal-body">
+                  <form action="imageUploadScript.php" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+
+                      <div class="col-sm-4">
+                        <input type="file" id="file1" name="file1" accept="image/*" onchange='openFile(event, this.id)'/>
+                        <div class="upload-thumbnail-wrapper">
+                          <span><label class="upload-image-button" for="file1"></label></span>
+                          <img data-bind="attr:{src: thumbnail}" id="image1" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div class="row">
+                          <div class="col-xs-4">
+                            <input type="file" id="file2" name="file2" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <div class="upload-thumbnail-wrapper">
+                              <span><label class="upload-image-button" for="file2"></label></span>
+                              <img data-bind="attr:{src: picture()[0].relPath}" id="image2" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                            </div>
+                            </div>
+                          <div class="col-xs-4">
+                            <input type="file" id="file3" name="file3" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <div class="upload-thumbnail-wrapper">
+                              <span><label class="upload-image-button" for="file3"></label></span>
+                              <img data-bind="attr:{src: picture()[1].relPath}" id="image3" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                            </div>
+                          </div>
+                          <div class="col-xs-4">
+                            <input type="file" id="file4" name="file4" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <div class="upload-thumbnail-wrapper">
+                              <span><label class="upload-image-button" for="file4"></label></span>
+                              <img data-bind="attr:{src: picture()[2].relPath}" id="image4" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-4">
+                            <input type="file" id="file5" name="file5" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <div class="upload-thumbnail-wrapper">
+                              <span><label class="upload-image-button" for="file5"></label></span>
+                              <img data-bind="attr:{src: picture()[3].relPath}" id="image5" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                            </div>
+                          </div>
+                          <div class="col-xs-4">
+                            <input type="file" id="file6" name="file6" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <div class="upload-thumbnail-wrapper">
+                              <span><label class="upload-image-button" for="file6"></label></span>
+                              <img data-bind="attr:{src: picture()[4].relPath}" id="image6" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                            </div>
+                          </div>
+                          <div class="col-xs-4">
+                            <input type="file" id="file7" name="file7" accept="image/*"onchange='openFile(event, this.id)'/>
+                            <div class="upload-thumbnail-wrapper">
+                              <span><label class="upload-image-button" for="file7"></label></span>
+                              <img data-bind="attr:{src: picture()[5].relPath}" id="image7" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" >Save</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
           <div class="description">
             <h4 data-bind="text: name"></h4>
             <h5 class="view" data-bind="text: school"></h5>
@@ -197,5 +287,19 @@ include 'access_control.php';
 </div>
 <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 <script src="/Website/scripts/libs/bootstrap-image-gallery.min.js"></script>
+<script type="text/javascript">
+  var openFile = function(event, id) {
+    var input = event.target;
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      document.getElementById("image"+id.slice(-1)).src = e.target.result;
+      console.log("here teeppp");
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  };
+</script>
 </body>
 </html>
