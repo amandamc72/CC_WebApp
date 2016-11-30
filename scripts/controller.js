@@ -192,7 +192,6 @@ function profileVM(data){
 	self.removeInterest = function(interest) {self.interests.remove(interest)};
 
 };
-var profileVMObject;
 
 function profileVMBind(data) {
 	$(function () {
