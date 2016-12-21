@@ -145,7 +145,12 @@ input[type="file"] {
 }
 
 .upload-image-button:hover {
-    border: 1px solid #fff;
+    border: 1px solid transparent;
+    color: #000;
+}
+
+.delete-image-button:hover {
+    border: 1px solid transparent;
     color: #000;
 }
 
@@ -159,6 +164,15 @@ input[type="file"] {
 
 .upload-image-button {
     background: url(/Website/img/add.png) no-repeat;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-size: 100% 100%;
+}
+
+.delete-image-button {
+    background: url(/Website/img/delete.png) no-repeat;
     cursor: pointer;
     width: 30px;
     height: 30px;

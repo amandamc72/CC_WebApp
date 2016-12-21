@@ -163,7 +163,7 @@ function getDob() {
 }
 
 // Profile properties that are observable
-function profileVM(data){
+var profileVM = function (data){
 	var self = this;
 	self.thumbnail = ko.observable(data.thumbnail);
 	self.picture = ko.observableArray(data.picture);
@@ -180,13 +180,15 @@ function profileVM(data){
 	self.interests = ko.observableArray(data.interests);
 
 	self.newInterestText = ko.observable();
-	
+
 	self.addInterest = function() {
+		console.log(self.newInterestText());
+		console.log('/Website/search/'+self.newInterestText().toString().toLowerCase()+'/');
 		self.interests.push({
-			interestDescription: this.newInterestText,
-			interestLink: "/Website/search/"+this.newInterestText.toString().toLowerCase()+"/"
+			interestDescription: self.newInterestText(),
+			interestLink: '/Website/search/'+self.newInterestText().toString().toLowerCase()+'/'
 		});
-	self.newInterestText("");
+		self.newInterestText("");
 	};
 	
 	self.removeInterest = function(interest) {self.interests.remove(interest)};
@@ -211,6 +213,11 @@ function profilePopulation(id){
 			if(!data.error) {
 				console.log(data);
 				profileVMBind(data);
+
+				//Used to set/get vm data
+				var vm = ko.dataFor(document.body);
+				console.log(vm.school());
+
 			} else {
 				console.log('error profile not found');
 			}
@@ -251,3 +258,83 @@ function whoIs(){
 		}
 	})
 }
+
+//Upload photos callback
+$(function() {
+	$('#image-upload-form').submit(function (e) {
+		e.preventDefault();
+		console.log("Start file submit");
+
+		var form = $('form')[0];
+		var data = new FormData(form);
+
+		$.ajax({
+			type: "POST",
+			url: rootURL + '/upload',
+			cache: false,
+			contentType: false,
+			processData: false,
+			data : data,
+			success: function(data){
+				console.log(data);
+				var vm = ko.dataFor(document.body);
+				console.log(vm.thumbnail());
+				console.log(vm.picture[0]);
+
+			}
+		});
+	});
+});
+
+//Set upload/delete buttons
+$(function() {
+	$('.modal-body img').each(function () {
+		var src = JSON.stringify({"src": $(this).closest(".upload-thumbnail-wrapper").find(".img-thumbnail").attr("src")});
+		if ($(this).attr('src') == 'http://placehold.it/150x150'){
+			$('.upload-image-button').hide();
+			$('.delete-image-button').show();
+		}
+		else{
+			$('.upload-image-button').show();
+			$('.delete-image-button').hide();
+		}
+	});
+});
+
+//Delete photo
+$(function () {
+
+	$(".delete-image-button").click(function(e) {
+		e.preventDefault();
+		var src = JSON.stringify({"src": $(this).closest(".upload-thumbnail-wrapper").find(".img-thumbnail").attr("src")});
+		console.log(src);
+
+		$.ajax({
+			type: 'DELETE',
+			url: rootURL + '/upload',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: src,
+			success:function(data){
+				console.log(data);
+			}
+		});
+	});
+});
+
+
+$(function () {
+	ko.bindingHandlers.fileSrc = {
+		init: function (element, valueAccessor) {
+			ko.utils.registerEventHandler(element, "change", function () {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					var value = valueAccessor();
+					value(e.target.result);
+				};
+
+				reader.readAsDataURL(element.files[0]);
+			});
+		}
+	};
+});
