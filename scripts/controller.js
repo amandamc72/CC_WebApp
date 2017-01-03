@@ -38,7 +38,7 @@ function logIn(){
 		data: loginFormToJSON(),
 		success: function(data){
 			console.log(data);
-			if(!data.error) {				
+			if(!data.error) {
 				window.location.href = "/Website/home/";
 			} else {
 				$('#loginPassword').effect( "shake", {times:4}, 1000 );
@@ -166,7 +166,12 @@ function getDob() {
 var profileVM = function (data){
 	var self = this;
 	self.thumbnail = ko.observable(data.thumbnail);
-	self.picture = ko.observableArray(data.picture);
+	self.image2 = ko.observable(data.picture[0].relPath);
+	self.image3 = ko.observable(data.picture[1].relPath);
+	self.image4 = ko.observable(data.picture[2].relPath);
+	self.image5 = ko.observable(data.picture[3].relPath);
+	self.image6 = ko.observable(data.picture[4].relPath);
+	self.image7 = ko.observable(data.picture[5].relPath);
 	self.name = ko.observable(data.name);
 	self.city = ko.observable(data.city);
 	self.state = ko.observable(data.state);
@@ -190,16 +195,9 @@ var profileVM = function (data){
 		});
 		self.newInterestText("");
 	};
-	
+
 	self.removeInterest = function(interest) {self.interests.remove(interest)};
-
 };
-
-function profileVMBind(data) {
-	$(function () {
-		ko.applyBindings(new profileVM(data));
-	});
-}
 
 // Profile population callback to API
 function profilePopulation(id){
@@ -212,11 +210,14 @@ function profilePopulation(id){
 		success: function(data){
 			if(!data.error) {
 				console.log(data);
-				profileVMBind(data);
+
+				ko.applyBindings(new profileVM(data));
 
 				//Used to set/get vm data
-				var vm = ko.dataFor(document.body);
-				console.log(vm.school());
+				//var vm = ko.dataFor(document.body);
+				//console.log(vm.thumbnail());
+				//console.log(vm.image2());
+				//console.log(vm.image3());
 
 			} else {
 				console.log('error profile not found');
@@ -254,10 +255,26 @@ function whoIs(){
 			}
 			else{
 				console.log("You are not logged in");
-			}		
+			}
 		}
 	})
 }
+var isDefault = false;
+var wasThumbnailClicked = false;
+
+//update image upload thumbnails on change
+var openFile = function(event, id) {
+	var input = event.target;
+	var reader = new FileReader();
+	reader.onload = function (e) {
+		document.getElementById("image"+id.slice(-1)).src = e.target.result;
+		console.log("here teeppp");
+		if (id == "file1"){
+			isDefault = true;
+		}
+	};
+	reader.readAsDataURL(input.files[0]);
+};
 
 //Upload photos callback
 $(function() {
@@ -268,6 +285,11 @@ $(function() {
 		var form = $('form')[0];
 		var data = new FormData(form);
 
+		//if thumbnail has changed
+		//formData.append('isDefault', 'true');
+		//else
+		//formData.append('isDefault', 'false');
+
 		$.ajax({
 			type: "POST",
 			url: rootURL + '/upload',
@@ -275,12 +297,8 @@ $(function() {
 			contentType: false,
 			processData: false,
 			data : data,
-			success: function(data){
-				console.log(data);
-				var vm = ko.dataFor(document.body);
-				console.log(vm.thumbnail());
-				console.log(vm.picture[0]);
-
+			success: function(data) {
+				window.location.reload(true);
 			}
 		});
 	});
@@ -288,15 +306,66 @@ $(function() {
 
 //Set upload/delete buttons
 $(function() {
-	$('.modal-body img').each(function () {
-		var src = JSON.stringify({"src": $(this).closest(".upload-thumbnail-wrapper").find(".img-thumbnail").attr("src")});
-		if ($(this).attr('src') == 'http://placehold.it/150x150'){
-			$('.upload-image-button').hide();
-			$('.delete-image-button').show();
+	$('#image1').on('load', function(e) {
+		if (ko.dataFor(e.target).thumbnail() == 'http://placehold.it/150x150'){
+			$('#thumbnail-upload-button').show(); $('#thumbnail-delete-button').hide();
 		}
 		else{
-			$('.upload-image-button').show();
-			$('.delete-image-button').hide();
+			$('#thumbnail-upload-button').hide(); $('#thumbnail-delete-button').show();
+		}
+	});
+
+	$('#image2').on('load', function(e) {
+		if (ko.dataFor(e.target).image2() == 'http://placehold.it/150x150'){
+			$('#image2-upload-button').show(); $('#image2-delete-button').hide();
+		}
+		else{
+			$('#image2-upload-button').hide(); $('#image2-delete-button').show();
+		}
+	});
+
+	$('#image3').on('load', function(e) {
+		if (ko.dataFor(e.target).image3() == 'http://placehold.it/150x150'){
+			$('#image3-upload-button').show(); $('#image3-delete-button').hide();
+		}
+		else{
+			$('#image3-upload-button').hide(); $('#image3-delete-button').show();
+		}
+	});
+
+	$('#image4').on('load', function(e) {
+		if (ko.dataFor(e.target).image4() == 'http://placehold.it/150x150'){
+			$('#image4-upload-button').show(); $('#image4-delete-button').hide();
+		}
+		else{
+			$('#image4-upload-button').hide(); $('#image4-delete-button').show();
+		}
+	});
+
+	$('#image5').on('load', function(e) {
+		if (ko.dataFor(e.target).image5() == 'http://placehold.it/150x150'){
+			$('#image5-upload-button').show(); $('#image5-delete-button').hide();
+		}
+		else{
+			$('#image5-upload-button').hide(); $('#image5-delete-button').show();
+		}
+	});
+
+	$('#image6').on('load', function(e) {
+		if (ko.dataFor(e.target).image6() == 'http://placehold.it/150x150'){
+			$('#image6-upload-button').show(); $('#image6-delete-button').hide();
+		}
+		else{
+			$('#image6-upload-button').hide(); $('#image6-delete-button').show();
+		}
+	});
+
+	$('#image7').on('load', function(e) {
+		if (ko.dataFor(e.target).image7() == 'http://placehold.it/150x150'){
+			$('#image7-upload-button').show(); $('#image7-delete-button').hide();
+		}
+		else{
+			$('#image7-upload-button').hide(); $('#image7-delete-button').show();
 		}
 	});
 });
@@ -306,7 +375,35 @@ $(function () {
 
 	$(".delete-image-button").click(function(e) {
 		e.preventDefault();
-		var src = JSON.stringify({"src": $(this).closest(".upload-thumbnail-wrapper").find(".img-thumbnail").attr("src")});
+		var id = $(this).closest(".upload-thumbnail-wrapper").find(".img-thumbnail").attr("id");
+		var img;
+		switch(id){
+			case "image1":
+				img = ko.dataFor(e.target).thumbnail();
+				break;
+			case "image2":
+				img = ko.dataFor(e.target).image2();
+				break;
+			case "image3":
+				img = ko.dataFor(e.target).image3();
+				break;
+			case "image4":
+				img = ko.dataFor(e.target).image4();
+				break;
+			case "image5":
+				img = ko.dataFor(e.target).image5();
+				break;
+			case "image6":
+				img = ko.dataFor(e.target).image6();
+				break;
+			case "image7":
+				img = ko.dataFor(e.target).image7();
+				break;
+			default:
+				break;
+		}
+
+		var src = JSON.stringify({"src": img});
 		console.log(src);
 
 		$.ajax({
@@ -317,12 +414,37 @@ $(function () {
 			data: src,
 			success:function(data){
 				console.log(data);
+				switch(id){
+					case "image1":
+						ko.dataFor(e.target).thumbnail("http://placehold.it/150x150");
+						break;
+					case "image2":
+						ko.dataFor(e.target).image2("http://placehold.it/150x150");
+						break;
+					case "image3":
+						ko.dataFor(e.target).image3("http://placehold.it/150x150");
+						break;
+					case "image4":
+						ko.dataFor(e.target).image4("http://placehold.it/150x150");
+						break;
+					case "image5":
+						ko.dataFor(e.target).image5("http://placehold.it/150x150");
+						break;
+					case "image6":
+						ko.dataFor(e.target).image6("http://placehold.it/150x150");
+						break;
+					case "image7":
+						ko.dataFor(e.target).image7("http://placehold.it/150x150");
+						break;
+					default:
+						break;
+				}
 			}
 		});
 	});
 });
 
-
+//Update vm on upload pic change
 $(function () {
 	ko.bindingHandlers.fileSrc = {
 		init: function (element, valueAccessor) {

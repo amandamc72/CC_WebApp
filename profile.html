@@ -7,7 +7,7 @@ include 'access_control.php';
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profile</title>
+  <title>Profile</title>4444
   <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
@@ -24,12 +24,11 @@ include 'access_control.php';
   <script src="/Website/scripts/controller.js"></script>
 
   <script type="text/javascript">
-      whoIs();
+    whoIs();
   </script>
   <script type="text/javascript">
     $(function() {
       $(".edit").hide();
-
       $("#edit_btn").click(function(){
         $(".view").hide();
         $(".edit").show();
@@ -111,9 +110,24 @@ include 'access_control.php';
           <a data-bind="attr: {href: thumbnail}"data-gallery>
             <img data-bind="attr:{src: thumbnail}" alt="Profile Thumbnail" class="img-responsive" />
           </a>
-          <div id="links" data-bind="foreach: picture">
-            <div data-bind="if: relPath != 'http://placehold.it/150x150'">
-              <a data-bind="attr: { href: relPath}" data-gallery></a>
+          <div id="links">
+            <div data-bind="if: image2() != 'http://placehold.it/150x150'">
+              <a data-bind="attr: { href: image2}" data-gallery></a>
+            </div>
+            <div data-bind="if: image3() != 'http://placehold.it/150x150'">
+              <a data-bind="attr: { href: image3}" data-gallery></a>
+            </div>
+            <div data-bind="if: image4() != 'http://placehold.it/150x150'">
+              <a data-bind="attr: { href: image4}" data-gallery></a>
+            </div>
+            <div data-bind="if: image5() != 'http://placehold.it/150x150'">
+              <a data-bind="attr: { href: image5}" data-gallery></a>
+            </div>
+            <div data-bind="if: image6() != 'http://placehold.it/150x150'">
+              <a data-bind="attr: { href: image6}" data-gallery></a>
+            </div>
+            <div data-bind="if: image7() != 'http://placehold.it/150x150'">
+              <a data-bind="attr: { href: image7}" data-gallery></a>
             </div>
           </div>
           <!-- End Profile Image Links -->
@@ -133,8 +147,8 @@ include 'access_control.php';
                         <input type="file" data-bind="fileSrc: thumbnail" id="file1" name="file1" accept="image/*" onchange='openFile(event, this.id)'/>
                         <div class="upload-thumbnail-wrapper">
                           <span>
-                            <label class="upload-image-button" for="file1"></label>
-                            <div class="delete-image-button"></div>
+                            <label id="thumbnail-upload-button" class="upload-image-button" for="file1"></label>
+                            <div id="thumbnail-delete-button" class="delete-image-button"></div>
                           </span>
                           <img data-bind="attr:{src: thumbnail}" id="image1" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
                         </div>
@@ -142,65 +156,65 @@ include 'access_control.php';
                       <div class="col-sm-8">
                         <div class="row">
                           <div class="col-xs-4">
-                            <input type="file" data-bind="fileSrc: picture" id="file2" name="file2" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <input type="file" data-bind="fileSrc: image2" id="file2" name="file2" accept="image/*" onchange='openFile(event, this.id)'/>
                             <div class="upload-thumbnail-wrapper">
                               <span>
-                                <label class="upload-image-button" for="file2"></label>
-                                <div class="delete-image-button"></div>
+                                <label id="image2-upload-button" class="upload-image-button" for="file2"></label>
+                                <div id="image2-delete-button" class="delete-image-button"></div>
                               </span>
-                              <img data-bind="attr:{src: picture()[0].relPath}" id="image2" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
-                            </div>
-                            </div>
-                          <div class="col-xs-4">
-                            <input type="file" id="file3" name="file3" accept="image/*" onchange='openFile(event, this.id)'/>
-                            <div class="upload-thumbnail-wrapper">
-                              <span>
-                                <label class="upload-image-button" for="file3"></label>
-                                <div class="delete-image-button"></div>
-                              </span>
-                              <img data-bind="attr:{src: picture()[1].relPath}" id="image3" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                              <img data-bind="attr:{src: image2}" id="image2" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
                             </div>
                           </div>
                           <div class="col-xs-4">
-                            <input type="file" id="file4" name="file4" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <input type="file" data-bind="fileSrc: image3" id="file3" name="file3" accept="image/*" onchange='openFile(event, this.id)'/>
                             <div class="upload-thumbnail-wrapper">
                               <span>
-                                <label class="upload-image-button" for="file4"></label>
-                                <div class="delete-image-button"></div>
+                                <label id="image3-upload-button" class="upload-image-button" for="file3"></label>
+                                <div id="image3-delete-button" class="delete-image-button"></div>
                               </span>
-                              <img data-bind="attr:{src: picture()[2].relPath}" id="image4" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                              <img data-bind="attr:{src: image3}" id="image3" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                            </div>
+                          </div>
+                          <div class="col-xs-4">
+                            <input type="file" data-bind="fileSrc: image4" id="file4" name="file4" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <div class="upload-thumbnail-wrapper">
+                              <span>
+                                <label id="image4-upload-button" class="upload-image-button" for="file4"></label>
+                                <div id="image4-delete-button" class="delete-image-button"></div>
+                              </span>
+                              <img data-bind="attr:{src: image4}" id="image4" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-xs-4">
-                            <input type="file" id="file5" name="file5" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <input type="file" data-bind="fileSrc: image5" id="file5" name="file5" accept="image/*" onchange='openFile(event, this.id)'/>
                             <div class="upload-thumbnail-wrapper">
                               <span>
-                                <label class="upload-image-button" for="file5"></label>
-                                <div class="delete-image-button"></div>
+                                <label id="image5-upload-button" class="upload-image-button" for="file5"></label>
+                                <div id="image5-delete-button" class="delete-image-button"></div>
                               </span>
-                              <img data-bind="attr:{src: picture()[3].relPath}" id="image5" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                              <img data-bind="attr:{src: image5}" id="image5" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
                             </div>
                           </div>
                           <div class="col-xs-4">
-                            <input type="file" id="file6" name="file6" accept="image/*" onchange='openFile(event, this.id)'/>
+                            <input type="file" data-bind="fileSrc: image6" id="file6" name="file6" accept="image/*" onchange='openFile(event, this.id)'/>
                             <div class="upload-thumbnail-wrapper">
                               <span>
-                                <label class="upload-image-button" for="file6"></label>
-                                <div class="delete-image-button"></div>
+                                <label id="image6-upload-button" class="upload-image-button" for="file6"></label>
+                                <div id="image6-delete-button" class="delete-image-button"></div>
                               </span>
-                              <img data-bind="attr:{src: picture()[4].relPath}" id="image6" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                              <img data-bind="attr:{src: image6}" id="image6" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
                             </div>
                           </div>
                           <div class="col-xs-4">
-                            <input type="file" id="file7" name="file7" accept="image/*"onchange='openFile(event, this.id)'/>
+                            <input type="file" data-bind="fileSrc: image7" id="file7" name="file7" accept="image/*"onchange='openFile(event, this.id)'/>
                             <div class="upload-thumbnail-wrapper">
                               <span>
-                                <label class="upload-image-button" for="file7"></label>
-                                <div class="delete-image-button"></div>
+                                <label id="image7-upload-button" class="upload-image-button" for="file7"></label>
+                                <div id="image7-delete-button" class="delete-image-button"></div>
                               </span>
-                              <img data-bind="attr:{src: picture()[5].relPath}" id="image7" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
+                              <img data-bind="attr:{src: image7}" id="image7" class="img-thumbnail upload-thumbnail" alt="Upload Thumbnail" />
                             </div>
                           </div>
                         </div>
@@ -272,16 +286,16 @@ include 'access_control.php';
               <li class="text-lg"><a data-bind="attr: { href: interestLink, title: interestDescription }, text: interestDescription"></a></li>
             </ul>
           </div>
-         <div class="edit" id="profile_interests_edit">
-          <form data-bind="submit: addInterest">
-            <input type="text" class="edit form-control" data-bind="value: newInterestText" placeholder="New Interest" />
-            <button type="submit" class="btn btn-info btn-sm">Add</button>
-          </form>
-        <ul class="nav" data-bind="foreach: interests, visible: interests().length > 0">
-          <li class="text-lg" data-bind="text: interestDescription"></li>
-          <a href="#" data-bind="click: $parent.removeInterest">Delete</a>
-        </ul>
-        </div>
+          <div class="edit" id="profile_interests_edit">
+            <form data-bind="submit: addInterest">
+              <input type="text" class="edit form-control" data-bind="value: newInterestText" placeholder="New Interest" />
+              <button type="submit" class="btn btn-info btn-sm">Add</button>
+            </form>
+            <ul class="nav" data-bind="foreach: interests, visible: interests().length > 0">
+              <li class="text-lg" data-bind="text: interestDescription"></li>
+              <a href="#" data-bind="click: $parent.removeInterest">Delete</a>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -292,19 +306,5 @@ include 'access_control.php';
 </div>
 <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 <script src="/Website/scripts/libs/bootstrap-image-gallery.min.js"></script>
-<script type="text/javascript">
-  var openFile = function(event, id) {
-    var input = event.target;
-
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      document.getElementById("image"+id.slice(-1)).src = e.target.result;
-      console.log("here teeppp");
-    };
-
-    reader.readAsDataURL(input.files[0]);
-  };
-</script>
 </body>
 </html>
