@@ -7,7 +7,7 @@ include 'access_control.php';
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profile</title>4444
+  <title>Profile</title>
   <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
@@ -275,8 +275,13 @@ include 'access_control.php';
             </ul>
           </div>
           <div class="edit" id="profile_courses_edit">
-            <ul class="nav" data-bind="foreach: courses">
-              <li class="text-lg"><input type="text" class="edit form-control" data-bind="textInput: courseName"></li>
+            <form data-bind="submit: addCourse">
+              <input type="text" class="edit form-control" data-bind="value: newCourseText" placeholder="New Course" required/>
+              <button type="submit" class="btn btn-info btn-sm">Add</button>
+            </form>
+            <ul class="nav" data-bind="foreach: courses, visible: courses().length > 0">
+              <li class="text-lg" data-bind="text: courseName"></li>
+              <a id="removeCourse" href="#" data-bind="click: $parent.removeCourse">Delete</a>
             </ul>
           </div>
           <h3>Interests</h3>
@@ -288,7 +293,7 @@ include 'access_control.php';
           </div>
           <div class="edit" id="profile_interests_edit">
             <form data-bind="submit: addInterest">
-              <input type="text" class="edit form-control" data-bind="value: newInterestText" placeholder="New Interest" />
+              <input type="text" class="edit form-control" data-bind="value: newInterestText" placeholder="New Interest" required/>
               <button type="submit" class="btn btn-info btn-sm">Add</button>
             </form>
             <ul class="nav" data-bind="foreach: interests, visible: interests().length > 0">

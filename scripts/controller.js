@@ -163,7 +163,7 @@ function getDob() {
 }
 
 // Profile properties that are observable
-var profileVM = function (data){
+var ProfileVM = function (data){
 	var self = this;
 	self.thumbnail = ko.observable(data.thumbnail);
 	self.image2 = ko.observable(data.picture[0].relPath);
@@ -185,20 +185,60 @@ var profileVM = function (data){
 	self.interests = ko.observableArray(data.interests);
 
 	self.newInterestText = ko.observable();
+	self.newCourseText = ko.observable();
 
 	self.addInterest = function() {
-		console.log(self.newInterestText());
+		console.log(self.newInterestText().toString().toLowerCase());
 		console.log('/Website/search/'+self.newInterestText().toString().toLowerCase()+'/');
 		self.interests.push({
-			interestDescription: self.newInterestText(),
+			interestDescription: self.newInterestText().toString().toLowerCase(),
 			interestLink: '/Website/search/'+self.newInterestText().toString().toLowerCase()+'/'
 		});
 		self.newInterestText("");
 	};
 
-	self.removeInterest = function(interest) {self.interests.remove(interest)};
-};
+	self.addCourse = function() {
+		console.log(self.newCourseText());
+		self.courses.push({
+			courseName: self.newCourseText()
+		});
+		self.newCourseText("");
+	};
 
+	self.removeInterest = function(interest) {
+		var data = JSON.stringify({"interestDescription": interest.interestDescription});
+		console.log(data);
+		$.ajax({
+			type: 'DELETE',
+			contentType: 'application/json',
+			url: rootURL + '/removeinterest',
+			dataType: 'json',
+			data: data,
+			success: function (data) {
+				console.log(data);
+			}
+		});
+		self.interests.remove(interest);
+	};
+
+	self.removeCourse = function(course) {
+	    var data = JSON.stringify({"courseName": course.courseName});
+	    console.log(data);
+
+		$.ajax({
+			type: 'DELETE',
+			contentType: 'application/json',
+			url: rootURL + '/removecourse',
+			dataType: 'json',
+			data: data,
+			success: function(data){
+                console.log(data);
+			}
+		});
+        self.courses.remove(course);
+	};
+};
+var profilevm;
 // Profile population callback to API
 function profilePopulation(id){
 	console.log('Profile Pop');
@@ -210,15 +250,8 @@ function profilePopulation(id){
 		success: function(data){
 			if(!data.error) {
 				console.log(data);
-
-				ko.applyBindings(new profileVM(data));
-
-				//Used to set/get vm data
-				//var vm = ko.dataFor(document.body);
-				//console.log(vm.thumbnail());
-				//console.log(vm.image2());
-				//console.log(vm.image3());
-
+				profilevm = new ProfileVM(data);
+				ko.applyBindings(profilevm);
 			} else {
 				console.log('error profile not found');
 			}
@@ -259,8 +292,9 @@ function whoIs(){
 		}
 	})
 }
-var isDefault = false;
+
 var wasThumbnailClicked = false;
+var hasChanged = false;
 
 //update image upload thumbnails on change
 var openFile = function(event, id) {
@@ -270,7 +304,7 @@ var openFile = function(event, id) {
 		document.getElementById("image"+id.slice(-1)).src = e.target.result;
 		console.log("here teeppp");
 		if (id == "file1"){
-			isDefault = true;
+			hasChanged = true;
 		}
 	};
 	reader.readAsDataURL(input.files[0]);
@@ -285,10 +319,12 @@ $(function() {
 		var form = $('form')[0];
 		var data = new FormData(form);
 
-		//if thumbnail has changed
-		//formData.append('isDefault', 'true');
-		//else
-		//formData.append('isDefault', 'false');
+		if(wasThumbnailClicked && hasChanged){
+			data.append('isDefault', true);
+		}
+		else{
+			data.append('isDefault', false);
+		}
 
 		$.ajax({
 			type: "POST",
@@ -301,6 +337,12 @@ $(function() {
 				window.location.reload(true);
 			}
 		});
+	});
+});
+//Set when thumbnail upload button is clicked
+$(function() {
+	$('#thumbnail-upload-button').click(function () {
+		wasThumbnailClicked = true;
 	});
 });
 
@@ -459,4 +501,22 @@ $(function () {
 			});
 		}
 	};
+});
+
+//Callback to update profile
+$(function() {
+	$('#update_btn').click(function (e) {
+		e.preventDefault();
+		var profileInfoJson = ko.toJSON(profilevm);
+		$.ajax({
+			type: 'PUT',
+			url: rootURL + '/profile',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: profileInfoJson,
+			success:function(data){
+				console.log(data);
+			}
+		});
+	});
 });
