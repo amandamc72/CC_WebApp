@@ -21,23 +21,11 @@ include 'access_control.php';
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
   <script src="/Website/scripts/libs/knockout-3.4.0.js"></script>
-  <script src="/Website/scripts/controller.js"></script>
+  <script src="/Website/scripts/common.js"></script>
+  <script src="/Website/scripts/profile.js"></script>
 
   <script type="text/javascript">
     whoIs();
-  </script>
-  <script type="text/javascript">
-    $(function() {
-      $(".edit").hide();
-      $("#edit_btn").click(function(){
-        $(".view").hide();
-        $(".edit").show();
-      });
-      $("#update_btn").click(function(){
-        $(".view").show();
-        $(".edit").hide();
-      });
-    });
   </script>
 </head>
 <body style="display: none;" data-bind="visible: true">
