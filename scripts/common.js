@@ -1,5 +1,7 @@
 // The root URL for the RESTful services
 var rootURL = "http://75.128.92.169:8080/CCService/v1/index.php";
+var defaultThumbnail = "http://placehold.it/620x400";
+var defaultSubPic = "http://placehold.it/150x150";
 
 // Logout callback to API
 function logOut(){
@@ -31,4 +33,16 @@ function whoIs(){
             }
         }
     })
+}
+
+//compute age form dob
+function getAge(date) {
+    var today = new Date();
+    var birthDate = new Date(date);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
 }

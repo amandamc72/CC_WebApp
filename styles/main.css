@@ -124,6 +124,8 @@ body {
 
 .preview-wrapper .preview-desc {
 	padding: 25px;
+    height: 150px;
+    width: auto;
 	background-color: #fff;
 }
 

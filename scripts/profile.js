@@ -95,7 +95,7 @@ function profilePopulation(id){
         dataType: "json",
         success: function(data){
             if(!data.error) {
-                //console.log(data);
+                console.log(data);
                 profilevm = new ProfileVM(data);
                 ko.applyBindings(profilevm);
             }
@@ -153,7 +153,7 @@ $(function() {
 //Set upload/delete buttons
 $(function() {
     $('#image1').on('load', function(e) {
-        if (ko.dataFor(e.target).thumbnail() == 'http://placehold.it/620x400'){
+        if (profilevm.thumbnail() == defaultThumbnail){
             $('#thumbnail-upload-button').show(); $('#thumbnail-delete-button').hide();
         }
         else{
@@ -162,7 +162,7 @@ $(function() {
     });
 
     $('#image2').on('load', function(e) {
-        if (ko.dataFor(e.target).image2() == 'http://placehold.it/150x150'){
+        if (profilevm.image2() == defaultSubPic){
             $('#image2-upload-button').show(); $('#image2-delete-button').hide();
         }
         else{
@@ -171,7 +171,7 @@ $(function() {
     });
 
     $('#image3').on('load', function(e) {
-        if (ko.dataFor(e.target).image3() == 'http://placehold.it/150x150'){
+        if (profilevm.image3() == defaultSubPic){
             $('#image3-upload-button').show(); $('#image3-delete-button').hide();
         }
         else{
@@ -180,7 +180,7 @@ $(function() {
     });
 
     $('#image4').on('load', function(e) {
-        if (ko.dataFor(e.target).image4() == 'http://placehold.it/150x150'){
+        if (profilevm.image4() == defaultSubPic){
             $('#image4-upload-button').show(); $('#image4-delete-button').hide();
         }
         else{
@@ -189,7 +189,7 @@ $(function() {
     });
 
     $('#image5').on('load', function(e) {
-        if (ko.dataFor(e.target).image5() == 'http://placehold.it/150x150'){
+        if (profilevm.image5() == defaultSubPic){
             $('#image5-upload-button').show(); $('#image5-delete-button').hide();
         }
         else{
@@ -198,7 +198,7 @@ $(function() {
     });
 
     $('#image6').on('load', function(e) {
-        if (ko.dataFor(e.target).image6() == 'http://placehold.it/150x150'){
+        if (profilevm.image6() == defaultSubPic){
             $('#image6-upload-button').show(); $('#image6-delete-button').hide();
         }
         else{
@@ -207,7 +207,7 @@ $(function() {
     });
 
     $('#image7').on('load', function(e) {
-        if (ko.dataFor(e.target).image7() == 'http://placehold.it/150x150'){
+        if (profilevm.image7() == defaultSubPic){
             $('#image7-upload-button').show(); $('#image7-delete-button').hide();
         }
         else{
@@ -222,32 +222,34 @@ $(function () {
         e.preventDefault();
         var id = $(this).closest(".upload-thumbnail-wrapper").find(".img-thumbnail").attr("id");
         var img;
+        var flag = "false";
         switch(id){
             case "image1":
-                img = ko.dataFor(e.target).thumbnail();
+                flag = "true";
+                img = profilevm.thumbnail();
                 break;
             case "image2":
-                img = ko.dataFor(e.target).image2();
+                img = profilevm.image2();
                 break;
             case "image3":
-                img = ko.dataFor(e.target).image3();
+                img = profilevm.image3();
                 break;
             case "image4":
-                img = ko.dataFor(e.target).image4();
+                img = profilevm.image4();
                 break;
             case "image5":
-                img = ko.dataFor(e.target).image5();
+                img = profilevm.image5();
                 break;
             case "image6":
-                img = ko.dataFor(e.target).image6();
+                img = profilevm.image6();
                 break;
             case "image7":
-                img = ko.dataFor(e.target).image7();
+                img = profilevm.image7();
                 break;
             default:
                 break;
         }
-        var src = JSON.stringify({"src": img});
+        var src = JSON.stringify({"src": img, "flag": flag});
 
         $.ajax({
             type: 'DELETE',
@@ -259,25 +261,25 @@ $(function () {
                 console.log(data);
                 switch(id){
                     case "image1":
-                        ko.dataFor(e.target).thumbnail("http://placehold.it/620x400");
+                        profilevm.thumbnail(defaultThumbnail);
                         break;
                     case "image2":
-                        ko.dataFor(e.target).image2("http://placehold.it/150x150");
+                        profilevm.image2(defaultSubPic);
                         break;
                     case "image3":
-                        ko.dataFor(e.target).image3("http://placehold.it/150x150");
+                        profilevm.image3(defaultSubPic);
                         break;
                     case "image4":
-                        ko.dataFor(e.target).image4("http://placehold.it/150x150");
+                        profilevm.image4(defaultSubPic);
                         break;
                     case "image5":
-                        ko.dataFor(e.target).image5("http://placehold.it/150x150");
+                        profilevm.image5(defaultSubPic);
                         break;
                     case "image6":
-                        ko.dataFor(e.target).image6("http://placehold.it/150x150");
+                        profilevm.image6(defaultSubPic);
                         break;
                     case "image7":
-                        ko.dataFor(e.target).image7("http://placehold.it/150x150");
+                        profilevm.image7(defaultSubPic);
                         break;
                     default:
                         break;

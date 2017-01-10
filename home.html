@@ -18,7 +18,10 @@ include 'access_control.php';
 	  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+	  <script src="/Website/scripts/libs/knockout-3.4.0.js"></script>
 	  <script src="/Website/scripts/common.js"></script>
+	  <script src="/Website/scripts/listview.js"></script>
   </head>
   <body>
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -46,160 +49,29 @@ include 'access_control.php';
 			</div>
 		</nav>
 		<!-- End Nav Bar-->
-		
 		<!-- Profile Preview List -->
-		<div class="container">
 		<div class="wrapper">
-		  <div class="row">
-			<div class="col-md-4 col-sm-4">  
+		<div class="container" data-bind="foreach: items_grouped">
+		  <div class="row" data-bind="foreach: $data">
+			<div class="col-md-4 col-sm-4">
                     <div class="preview-wrapper">
-                        <a href="/profile?id=59196"><img class="img-responsive" src="http://www1.pictures.stylebistro.com/gi/End+Love+Portraits+2012+Sundance+Film+Festival+PfeRw4FWUjYx.jpg" href="/profile?id=59196" alt="92735_av1"></a>
+						<a data-bind="attr: {href: '/profile/' + memberId}">
+							<img data-bind="attr:{src: thumbnail}" alt="Thumbnail" class="img-responsive" />
+						</a>
 						<div class="preview-desc">
-						<a href="/profile?id=59196" class="username">nickcap</a>
-						<div class="basic-info">
-							<span class="age">25</span> Eastern Michigan University
-						</div>
-						<div class="status-info">
-							Junior
-						</div>
-						<div class="major-info">
-							Computer Science
-						</div>
-						<div class="minor-info">
-							Computer Information Systems
-						</div>
-						<div class="description">
-							Something Something Something
-						</div>
-						</div>
-                    </div>
-            </div>
-			
-			<div class="col-md-4 col-sm-4">  
-                   <div class="preview-wrapper">
-						<a href="/profile?id=59196"><img class="img-responsive" src="http://ak-hdl.buzzfed.com/static/2013-12/enhanced/webdr01/23/13/grid-cell-25294-1387822460-3.jpg" href="/profile?id=59196" alt="92735_av1"></a>
-						<div class="preview-desc">
-						<a href="/profile?id=59196" class="username">ronB</a>
-						<div class="basic-info">
-							<span class="age">21</span> Central Michigan University
-						</div>
-						<div class="status-info">
-							Masters Graduate
-						</div>
-						<div class="major-info">
-							Engeering
-						</div>
-						<div class="minor-info">
-							-
-						</div>
-						<div class="description">
-							Something Something Something
-						</div>
-						</div>
-					</div>
-            </div>
-			
-			<div class="col-md-4 col-sm-4">  
-                    <div class="preview-wrapper">
-                        <a href="/profile?id=59196"><img class="img-responsive" src="https://i.ytimg.com/vi/YSzOXtXm8p0/hqdefault.jpg" href="/profile?id=59196" alt="92735_av1"></a>
-						<div class="preview-desc">
-						<a href="/profile?id=59196" class="username">thisIsPatrick</a>
-						<div class="basic-info">
-							<span class="age">29</span> University of Michigan
-						</div>
-						<div class="status-info">
-							Senior
-						</div>
-						<div class="major-info">
-							Accounting	
-						</div>
-						<div class="minor-info">
-							Actuarial Science
-						</div>
-						<div class="description">
-							Something Something Something
-						</div>
+							<a data-bind="attr: { href: '/profile/' + memberId, title: firstname }, text: firstname"></a>
+							<div class="basic-info">
+								<span class="age" data-bind="text: getAge(dob)"></span>
+								<span class="school" data-bind="text: school"></span>
+							</div>
+							<div class="standing-info"data-bind="text: standing"></div>
+							<div class="major-info" data-bind="text: major"></div>
+							<div class="minor-info" data-bind="text: minor"></div>
 						</div>
                     </div>
             </div>
             </div>
-			
-			<div class="row">
-			<div class="col-md-4 col-sm-4">  
-                    <div class="preview-wrapper">
-                       <a href="/profile?id=59196"><img class="img-responsive" src="http://a.fod4.com/images/user_photos/1381015/64568222ef886647a64cde9a9ecb5170_square_fullsize." href="/profile?id=59196" alt="92735_av1"></a>
-						<div class="preview-desc">
-						<a href="/profile?id=59196" class="username">missColumbia</a>
-						<div class="basic-info">
-							<span class="age">25</span> Eastern Michigan University
-						</div>
-						<div class="status-info">
-							Junior
-						</div>
-						<div class="major-info">
-							Animal Science
-						</div>
-						<div class="minor-info">
-							Anthropology
-						</div>
-						<div class="description">
-							Something Something Something
-						</div>
-						</div>
-					</div>
-            </div>
-			
-			<div class="col-md-4 col-sm-4">  
-					<div class="preview-wrapper">
-						<a href="/profile?id=59196"><img class="img-responsive" src="http://i1.kym-cdn.com/entries/icons/original/000/007/508/watch-out-we-got-a-badass-over-here-meme.png" href="/profile?id=59196" alt="92735_av1"></a>
-						<div class="preview-desc">
-						<a href="/profile?id=59196" class="username">badass</a>
-						<div class="basic-info">
-							<span class="age">22</span> Michigan State
-						</div>
-						<div class="status-info">
-							Doctorate
-						</div>
-						<div class="major-info">
-							Biostatistics	
-						</div>
-						<div class="minor-info">
-							-
-						</div>
-						<div class="description">
-							Something Something Something
-						</div>
-						</div>
-                    </div>
-            </div>
-			
-			<div class="col-md-4 col-sm-4">  
-                    <div class="preview-wrapper">
-						<a href="/profile?id=59196"><img class="img-responsive" src="http://br.web.img3.acsta.net/newsv7/15/12/04/18/42/054922.jpg" href="/profile?id=59196" alt="92735_av1"></a>
-						<div class="preview-desc">
-						<a href="/profile?id=59196" class="username">whaa</a>
-						<div class="basic-info">
-							<span class="age">25</span> Eastern Michigan University
-						</div>
-						<div class="status-info">
-							Junior
-						</div>
-						<div class="major-info">
-							Chemical Physics
-						</div>
-						<div class="minor-info">
-							Chinese
-						</div>
-						<div class="description">
-							Something Something Something
-						</div>
-						</div>
-                    </div>
-            </div>
-            </div>
-		  
-		  
-		
+
 		</div>
 		<footer>
 			<p>&copy; 2015 Company, Inc.</p>
