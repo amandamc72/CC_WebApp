@@ -2,15 +2,11 @@ AddHandler x-httpd-php .html .htm
 AddHandler php5-script .php .html .htm
 
 RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/]+)/$ $1.html
 
 RewriteRule ^signup/([a-zA-Z0-9_-]+)$ signup.html?code=$1
 RewriteRule ^signup/([a-zA-Z0-9_-]+)/$ signup.html?code=$1
 
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^/]+)/$ $1.html
-RewriteRule ^([^/]+)/([^/]+)/$ /$1/$2.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
-RewriteRule (.*)$ /$1/ [R=301,L]
+RewriteRule ^profile/([0-9]+)$ profile.html?id=$1
+RewriteRule ^profile/([0-9]+)/$ profile.html?id=$1
