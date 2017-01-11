@@ -2,40 +2,52 @@
 var rootURL = "http://75.128.92.169:8080/CCService/v1/index.php";
 var defaultThumbnail = "http://placehold.it/620x400";
 var defaultSubPic = "http://placehold.it/150x150";
+var id;
 
-// Logout callback to API
-function logOut(){
-    console.log('log out');
-    $.ajax({
-        type: "GET",
-        contentType: 'application/json',
-        url: rootURL + '/logout',
-        dataType: "json",
-        success: function(data){
-            console.log(data.message);
-        }
-    })
-}
+// Logout link
+$(function() {
+    $('#logoutLink').click(function (e) {
+        e.preventDefault();
+        console.log('log out');
+        $.ajax({
+            type: "GET",
+            contentType: 'application/json',
+            url: rootURL + '/logout',
+            dataType: "json",
+            success: function(data){
+                console.log(data.message);
+            }
+        })
+    });
+});
 
-// Session callback to API
-function whoIs(){
+// My profile link
+$(function() {
+    $('#myProfileLink').click(function () {
+        document.getElementById("myProfileLink").href = "/Website/profile/" + id;
+    });
+});
+
+// Session id callback
+$(function() {
     $.ajax({
         type: "GET",
         contentType: 'application/json',
         url: rootURL + '/member',
         dataType: "json",
-        success: function(data){
-            if (!data.error){
-                profilePopulation(data.id.memberId);
-            }
-            else{
-                console.log("You are not logged in");
+        success: function (data) {
+            if (!data.error) {
+                getId(data.id.memberId);
             }
         }
     })
+});
+
+function getId(data) {
+    id = data;
 }
 
-//compute age form dob
+// Compute age form dob
 function getAge(date) {
     var today = new Date();
     var birthDate = new Date(date);

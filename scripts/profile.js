@@ -87,20 +87,26 @@ var ProfileVM = function (data){
 };
 
 // Get profile request
-function profilePopulation(id){
+$(function() {
     $.ajax({
         type: "GET",
         contentType: 'application/json',
-        url: rootURL + '/profile/' + id,
+        url: rootURL + '/profile/' + getMemberId(window.location.href),
         dataType: "json",
         success: function(data){
             if(!data.error) {
                 console.log(data);
                 profilevm = new ProfileVM(data);
                 ko.applyBindings(profilevm);
+                updateControls();
             }
         }
     });
+});
+
+//Get member id
+function getMemberId(str) {
+    return str.split('/')[5];
 }
 
 //update image upload thumbnails on change
@@ -312,7 +318,7 @@ $(function() {
         var profileInfoJson = ko.toJSON(profilevm);
         $.ajax({
             type: 'PUT',
-            url: rootURL + '/profile',
+            url: rootURL + '/profile/' + getMemberId(window.location.href),
             contentType: 'application/json',
             dataType: 'json',
             data: profileInfoJson,
@@ -324,14 +330,21 @@ $(function() {
 });
 
 //Edit update buttons control
-$(function() {
+function updateControls() {
     $(".edit").hide();
-    $("#edit_btn").click(function(){
-        $(".view").hide();
-        $(".edit").show();
-    });
-    $("#update_btn").click(function(){
-        $(".view").show();
-        $(".edit").hide();
-    });
-});
+    if (id == getMemberId(window.location.href)) {
+        $("#edit_btn").click(function () {
+            $(".view").hide();
+            $(".edit").show();
+        });
+        $("#update_btn").click(function () {
+            $(".view").show();
+            $(".edit").hide();
+        });
+    }
+    else {
+        $("#edit_btn").hide();
+        $("#update_btn").hide();
+        $("#addPhotosLink").hide();
+    }
+}
