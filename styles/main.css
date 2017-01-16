@@ -182,5 +182,16 @@ input[type="file"] {
     background-size: 100% 100%;
 }
 /* End Upload Image Widget Style */
+/* Settings Page Style */
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+.toggle.ios .toggle-handle { border-radius: 20px; }
+#changePassBtn{
+    margin-top: 10px;
+    float: right;
+}
+.settings_input{
+    max-height: 30px;
+}
+/* EndSettings Page Style */
 
 
