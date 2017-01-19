@@ -182,15 +182,93 @@ input[type="file"] {
     background-size: 100% 100%;
 }
 /* End Upload Image Widget Style */
+
 /* Settings Page Style */
-.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
-.toggle.ios .toggle-handle { border-radius: 20px; }
-#changePassBtn{
+.btn.btn-primary.change_button{
     margin-top: 10px;
     float: right;
 }
 .settings_input{
     max-height: 30px;
+}
+.gender_text{
+    position: relative;
+    bottom: 20px;
+}
+
+/* The switch - the box around the tog */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The tog */
+.tog {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.tog:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .tog {
+    background-color: #2196F3;
+}
+
+input:focus + .tog {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .tog:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded togs */
+.tog.round {
+    border-radius: 34px;
+}
+
+.tog.round:before {
+    border-radius: 50%;
+}
+
+#ageSlider .slider-handle {
+    background: #2196F3;
+}
+
+#ageSlider .slider-selection{
+    background: #ccc;
+}
+
+#ageSlider .slider-track-low{
+    background: #ccc;
+}
+
+#ageSlider .slider-track-high{
+    background: #ccc;
 }
 /* EndSettings Page Style */
 
