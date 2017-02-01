@@ -1,5 +1,6 @@
 var offset = 0;
-var ListViewVM = function(data){
+
+var ListViewVM = function(data, endpoint, jsonData){
     var self = this;
     self.items = ko.observableArray(data.members);
     self.items_grouped = ko.computed(function () {
@@ -19,14 +20,16 @@ var ListViewVM = function(data){
 
     self.addItems = function() {
         console.log("Get more");
+        var jsonObj = JSON.parse(jsonData);
         offset = offset+24;
-        console.log(JSON.stringify({"offset": offset}));
+        jsonObj.offset = offset;
+        var data = JSON.stringify(jsonObj);
         $.ajax({
             type: "POST",
             contentType: 'application/json',
-            url: rootURL + '/home',
+            url: rootURL + '/' + endpoint,
             dataType: "json",
-            data: JSON.stringify({"offset": offset}),
+            data: data,
             success: function(data){
                 console.log(data);
                 for(i = 0; i < data.members.length; i++) {
@@ -37,30 +40,13 @@ var ListViewVM = function(data){
     };
 
     $(window).scroll(function() {
-        /*if($(window).scrollTop() + $(window).height() == $(document).height()) {
-            self.addItems();
-        }*///at bottom
+        //at bottom
+        if($(window).scrollTop() + $(window).height() == $(document).height()) {
+         self.addItems();
+        }
 
-        if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
+        /*if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
             self.addItems();
-        }//near bottom
+        }*///near bottom
     })
 };
-var listviewVM;
-
-$(function() {
-    console.log("Get List");
-    console.log(JSON.stringify({"offset": offset}));
-    $.ajax({
-        type: "POST",
-        contentType: 'application/json',
-        url: rootURL + '/home',
-        dataType: "json",
-        data: JSON.stringify({"offset": offset}),
-        success: function(data){
-            console.log(data);
-            listviewVM = new ListViewVM(data);
-            ko.applyBindings(listviewVM);
-        }
-    });
-});

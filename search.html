@@ -12,12 +12,17 @@ include 'access_control.php';
 	  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.0/css/bootstrap-slider.min.css">
 	  <link rel="stylesheet" href="/Website/styles/main.css">
 
 	  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.0/bootstrap-slider.min.js"></script>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+	  <script src="/Website/scripts/libs/knockout-3.4.0.js"></script>
 	  <script src="/Website/scripts/common.js"></script>
+	  <script src="/Website/scripts/listviewVM.js"></script>
+	  <script src="/Website/scripts/search_results.js"></script>
   </head>
   <body>
     <div class="container">
@@ -46,62 +51,116 @@ include 'access_control.php';
 			</div>
 		</nav>
 		<!--End Nav Bar-->
-		<form class="form-horizontal" action="http://people.emich.edu/amccart8/search.php">
+		<form id="search-form" class="form-horizontal" action="#" method="POST">
 			<h2 class="form-horizontal-heading">Enter Search Criteria</h2>
 			
 			<div class="form-group">
-				<label for="searchGender" class="control-label col-xs-2">Looking For</label>
+				<label for="school" class="control-label col-xs-2">School</label>
 				<div class="col-xs-10">
-					<input type="email" class="form-control" id="searchGender" placeholder="Email">
+					<input type="text" class="form-control" id="school">
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="searchAge" class="control-label col-xs-2">Age</label>
+				<label for="major" class="control-label col-xs-2">Major</label>
 				<div class="col-xs-10">
-					<input type="password" class="form-control" id="searchAge" placeholder="Password">
+					<input type="text" class="form-control" id="major">
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="searchIntent" class="control-label col-xs-2">Intent</label>
+				<label for="minor" class="control-label col-xs-2">Minor</label>
 				<div class="col-xs-10">
-					<input type="password" class="form-control" id="searchIntent" placeholder="Password">
+					<input type="text" class="form-control" id="minor">
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="searchState" class="control-label col-xs-2">State</label>
+				<label for="age" class="control-label col-xs-2">Age</label>
+                <span class="pull-right give-room">
+				    <input id="age" type="text" class="slider form-control" value="" data-slider-min="18" data-slider-max="40" data-slider-step="1" data-slider-value="[18,40]"/>
+                </span>
+			</div>
+
+			<div class="form-group" id="gender-radio">
+				<span class="pull-right give-room">
+				<label class="radio-inline">
+					<input type="radio" name="gender" id="any" value="" checked>Any
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="gender" id="male" value="male">Male
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="gender" id="female" value="female">Female
+				</label>
+				</span>
+			</div>
+			
+			<div class="form-group">
+				<label for="city" class="control-label col-xs-2">City</label>
 				<div class="col-xs-10">
-					<input type="password" class="form-control" id="searchState" placeholder="Password">
+					<input type="text" class="form-control" id="city">
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="searchSchool" class="control-label col-xs-2">School</label>
+				<label for="state" class="control-label col-xs-2">State</label>
 				<div class="col-xs-10">
-					<input type="password" class="form-control" id="searchSchool" placeholder="Password">
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="searchMajor" class="control-label col-xs-2">Major</label>
-				<div class="col-xs-10">
-					<input type="password" class="form-control" id="searchMajor" placeholder="Password">
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="searchMinor" class="control-label col-xs-2">Minor</label>
-				<div class="col-xs-10">
-					<input type="password" class="form-control" id="searchMinor" placeholder="Password">
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="searchProfiles" class="control-label col-xs-2">Profile Type</label>
-				<div class="col-xs-10">
-					<input type="password" class="form-control" id="searchProfiles" placeholder="Password">
+
+					<select data-toggle='tooltip' data-trigger='focus' data-placement='top' title='Select state from list' class="form-control" id="state" name="state">
+						<option value="">Select...</option>
+						<option value="Alabama">Alabama</option>
+						<option value="Alaska">Alaska</option>
+						<option value="Arizona">Arizona</option>
+						<option value="Arkansas">Arkansas</option>
+						<option value="California">California</option>
+						<option value="Colorado">Colorado</option>
+						<option value="Connecticut">Connecticut</option>
+						<option value="Delaware">Delaware</option>
+						<option value="Florida">Florida</option>
+						<option value="Georgia">Georgia</option>
+						<option value="Hawaii">Hawaii</option>
+						<option value="Idaho">Idaho</option>
+						<option value="Illinois">Illinois</option>
+						<option value="Indiana">Indiana</option>
+						<option value="Iowa">Iowa</option>
+						<option value="Kansas">Kansas</option>
+						<option value="Kentucky">Kentucky</option>
+						<option value="Louisiana">Louisiana</option>
+						<option value="Maine">Maine</option>
+						<option value="Maryland">Maryland</option>
+						<option value="Massachusetts">Massachusetts</option>
+						<option value="Michigan">Michigan</option>
+						<option value="Minnesota">Minnesota</option>
+						<option value="Mississippi">Mississippi</option>
+						<option value="Missouri">Missouri</option>
+						<option value="Montana">Montana</option>
+						<option value="Nebraska">Nebraska</option>
+						<option value="Nevada">Nevada</option>
+						<option value="New Hampshire">New Hampshire</option>
+						<option value="New Jersey">New Jersey</option>
+						<option value="New Mexico">New Mexico</option>
+						<option value="New York">New York</option>
+						<option value="North Carolina">North Carolina</option>
+						<option value="North Dakota">North Dakota</option>
+						<option value="Ohio">Ohio</option>
+						<option value="Oklahoma">Oklahoma</option>
+						<option value="Oregon">Oregon</option>
+						<option value="Pennsylvania">Pennsylvania</option>
+						<option value="Rhode Island">Rhode Island</option>
+						<option value="South Carolina">South Carolina</option>
+						<option value="South Dakota">South Dakota</option>
+						<option value="Tennessee">Tennessee</option>
+						<option value="Texas">Texas</option>
+						<option value="Utah">Utah</option>
+						<option value="Vermont">Vermont</option>
+						<option value="Virginia">Virginia</option>
+						<option value="Washington">Washington</option>
+						<option value="Washington, D.C.">Washington, D.C.</option>
+						<option value="West Virginia">West Virginia</option>
+						<option value="Wisconsin">Wisconsin</option>
+						<option value="Wyoming">Wyoming</option>
+					</select>
 				</div>
 			</div>
 			
@@ -111,10 +170,37 @@ include 'access_control.php';
 				</div>
 			</div>
 			
-		</form> 
+		</form>
+
+		<div class="wrapper" id="search-result">
+			<div class="container" data-bind="foreach: items_grouped">
+				<div class="row" data-bind="foreach: $data">
+					<div class="col-md-4 col-sm-4">
+						<div class="preview-wrapper">
+							<a data-bind="attr: {href: '../profile/' + memberId}">
+								<img data-bind="attr:{src: thumbnail}" alt="Thumbnail" class="img-responsive" />
+							</a>
+							<div class="preview-desc">
+								<a data-bind="attr: { href: '../profile/' + memberId, title: firstname }, text: firstname"></a>
+								<div class="basic-info">
+									<span class="age" data-bind="text: getAge(dob)"></span>
+									<span class="school" data-bind="text: school"></span>
+								</div>
+								<div class="standing-info"data-bind="text: standing"></div>
+								<div class="major-info" data-bind="text: major"></div>
+								<div class="minor-info" data-bind="text: minor"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
 	<footer>
 		<p>&copy; 2015 Company, Inc.</p>
-	</footer>	
+	</footer>
     </div>
   </body>
 </html>

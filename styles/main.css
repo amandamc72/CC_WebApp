@@ -271,5 +271,15 @@ input:checked + .tog:before {
     background: #ccc;
 }
 /* EndSettings Page Style */
-
+/* Search page Style */
+.give-room{
+    margin-right: 30px;
+}
+.popover {
+    height: 40px;
+}
+.popover-title {
+    color: red;
+    font-size: 15px;
+}
 
