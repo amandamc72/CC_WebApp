@@ -7,7 +7,7 @@ $(function() {
     $('#search-form').submit(function(e) {
         e.preventDefault();
         if($('#city').val() && $('#state').val() === ""){
-            $('#state').popover('show')
+            $('#state').popover('show');
             return;
         }
         console.log("Get List");
