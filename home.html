@@ -8,7 +8,7 @@ include 'access_control.php';
 	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <title>Home</title>
-
+	  <link rel="stylesheet" type="text/css" href="/Website/styles/libs/jTinder.css">
 	  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
@@ -20,11 +20,9 @@ include 'access_control.php';
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
 	  <script src="/Website/scripts/libs/knockout-3.4.0.js"></script>
-	  <script src="/Website/scripts/common.js"></script>
-	  <script src="/Website/scripts/listviewVM.js"></script>
-	  <script src="/Website/scripts/home.js"></script>
+
   </head>
-  <body style="display: none;" data-bind="visible: true">
+  <body class="home" style="display: none;" data-bind="visible: true">
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
@@ -50,8 +48,33 @@ include 'access_control.php';
 			</div>
 		</nav>
 		<!-- End Nav Bar-->
+		<div class="mobile-wrapper desk-wrapper">
+			<div class="mobile-wrap desk-wrap">
+				<div id="tinderslide">
+					<ul data-bind="foreach: items">
+						<li>
+							<img data-bind="attr:{src: thumbnail}" alt="Thumbnail" class="img"/>
+							<div data-bind="text: firstname"></div>
+							<div>
+								<span data-bind="text: getAge(dob)"></span>
+								<span data-bind="text: school"></span>
+							</div>
+							<div data-bind="text: major"></div>
+							<div class="like"></div>
+							<div class="dislike"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="actions hidden-xs">
+				<a href="#" class="dislike"><i></i></a>
+				<a href="#" class="like"><i></i></a>
+			</div>
+		</div>
+
 		<!-- Profile Preview List -->
-		<div class="wrapper">
+		<div id="prev-list" class="wrapper">
 		<div class="container" data-bind="foreach: items_grouped">
 		  <div class="row" data-bind="foreach: $data">
 			<div class="col-md-4 col-sm-4">
@@ -74,9 +97,21 @@ include 'access_control.php';
             </div>
 
 		</div>
-		<footer>
-			<p>&copy; 2015 Company, Inc.</p>
-		</footer>
+
+            <div class="swipe-button">
+                <a href="/Website/swipe/"><img src="/Website/img/swipe.png" alt="swbtn" width="50" height="50"></a>
+            </div>
+
+
+            <footer>
+			    <p>&copy; 2015 Company, Inc.</p>
+		    </footer>
 		</div>
+
+		<script type="text/javascript" src="/Website/scripts/libs/jquery.transform2d.js"></script>
+		<script type="text/javascript" src="/Website/scripts/libs/jquery.jTinder.js"></script>
+		<script src="/Website/scripts/common.js"></script>
+		<script src="/Website/scripts/listviewVM.js"></script>
+		<script src="/Website/scripts/home.js"></script>
   </body>
 </html>

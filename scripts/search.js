@@ -3,6 +3,7 @@ var searchviewVM;
 $(function() {
     $("#age").slider({focus: true});
     $("#search-result").hide();
+    $(".swipe-button").hide();
 
     $('#search-form').submit(function(e) {
         e.preventDefault();
@@ -21,7 +22,9 @@ $(function() {
                 console.log(data);
                 searchviewVM = new ListViewVM(data, 'search', searchFormToJSON());
                 ko.applyBindings(searchviewVM);
+
                 $("#search-result").show();
+                $(".swipe-button").show();
                 $("#search-form").hide();
             }
         });
