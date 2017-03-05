@@ -1,4 +1,9 @@
 var listviewVM;
+var UserMatchVM = function (data) {
+    var self = this;
+    self.theirThumbnail = ko.observable(data.targetPic);
+    self.theirName = ko.observable(data.targetName);
+};
 
 $(function() {
     console.log("Get List");
@@ -19,15 +24,17 @@ $(function() {
              * jTinder initialization
              */
             $("#tinderslide").jTinder({
-                // dislike callback
                 onDislike: function (item) {
-                    // set the status text
-                    $('#status').html('Dislike image ' + (item.index()+1));
+                    console.log('Dislike image ' + (item.index()+1));
+                    var target = listviewVM.items(item.index()+1);
+                    console.log(target);
+                    //swipeRequest('left', target);
                 },
-                // like callback
                 onLike: function (item) {
-                    // set the status text
-                    $('#status').html('Like image ' + (item.index()+1));
+                    console.log('Like image ' + (item.index()+1));
+                    var target = listviewVM(item.index()+1);
+                    console.log(target);
+                   // swipeRequest('right', target);
                 },
                 animationRevertSpeed: 200,
                 animationSpeed: 400,
@@ -49,3 +56,26 @@ $(function() {
         }
     });
 });
+
+function swipeRequest(swipeType, who) {
+    var swipeData = JSON.stringify({"swipeType": swipeType, "target": who});
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: rootURL + '/swipe',
+        dataType: 'json',
+        data: swipeData,
+        success: function (data) {
+            console.log(data);
+            if(data.match){
+                conole.log("Its a match");
+                //show match modal
+                th
+            }
+            else{
+                console.log("No match");
+                //carry on
+            }
+        }
+    })
+}
