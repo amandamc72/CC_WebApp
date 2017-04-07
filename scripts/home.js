@@ -2,8 +2,6 @@ var listviewVM;
 
 $(function() {
     console.log("Get List");
-    //temp hide for swipe layout testing
-    $('#prev-list').hide();
     var jsonOffset = JSON.stringify({"offset": 0});
     $.ajax({
         type: "POST",
