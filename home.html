@@ -48,6 +48,29 @@ include 'access_control.php';
 			</div>
 		</nav>
 		<!-- End Nav Bar-->
+		<!--Begin match modal-->
+		<div id="match-modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">It's a Match!</h4>
+					</div>
+					<div class="modal-body">
+                        <img data-bind="attr: {src: MyThumnail}" alt="MyThumbnail" class="img-responsive">
+						<div data-bind="text: myName"></div>
+
+						<img data-bind="attr: {src: theirThumnail}" alt="TheirThumbnail" class="img-responsive">
+						<div data-bind="text: theirName"></div></div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn-block btn-default" data-dismiss="modal">Send Message</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--End match modal-->
 		<div class="mobile-wrapper desk-wrapper">
 			<div class="mobile-wrap desk-wrap">
 				<div id="tinderslide">
