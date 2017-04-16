@@ -63,3 +63,7 @@ function getAge(date) {
     }
     return age;
 }
+
+function getCode(str){
+    return str.split('/')[5];
+}

@@ -120,10 +120,6 @@ function signUpFormToJSON() {
         "gender": $('input[name=gender]:checked').val()
     });
 }
-// Sign up form helpers
-function getCode(str){
-    return str.split('/')[5];
-}
 
 function getDob() {
     var month = $("#month").val();
