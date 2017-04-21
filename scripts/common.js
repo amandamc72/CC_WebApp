@@ -1,5 +1,5 @@
 // The root URL for the RESTful services
-var rootURL = "http://98.248.105.181:8080/CCService/v1/index.php";
+var rootURL = "http://24.4.63.249:8080/CCService/v1/index.php";
 var defaultThumbnail = "http://placehold.it/620x400";
 var defaultSubPic = "http://placehold.it/150x150";
 var id;
