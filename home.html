@@ -98,38 +98,38 @@ include 'access_control.php';
 
 		<!-- Profile Preview List -->
 		<div id="prev-list" class="wrapper">
-		<div class="container" data-bind="foreach: items_grouped">
-		  <div class="row" data-bind="foreach: $data">
-			<div class="col-md-4 col-sm-4">
-                    <div class="preview-wrapper">
-						<a data-bind="attr: {href: '../profile/' + memberId}">
-							<img data-bind="attr:{src: thumbnail}" alt="Thumbnail" class="img-responsive" />
-						</a>
-						<div class="preview-desc">
-							<a data-bind="attr: { href: '../profile/' + memberId, title: firstname }, text: firstname"></a>
-							<div class="basic-info">
-								<span class="age" data-bind="text: getAge(dob)"></span>
-								<span class="school" data-bind="text: school"></span>
+			<div class="container" data-bind="foreach: items_grouped">
+			  <div class="row" data-bind="foreach: $data">
+				<div class="col-md-4 col-sm-4">
+						<div class="preview-wrapper">
+							<a data-bind="attr: {href: '../profile/' + memberId}">
+								<img data-bind="attr:{src: thumbnail}" alt="Thumbnail" class="img-responsive" />
+							</a>
+							<div class="preview-desc">
+								<a data-bind="attr: { href: '../profile/' + memberId, title: firstname }, text: firstname"></a>
+								<div class="basic-info">
+									<span class="age" data-bind="text: getAge(dob)"></span>
+									<span class="school" data-bind="text: school"></span>
+								</div>
+								<div class="standing-info"data-bind="text: standing"></div>
+								<div class="major-info" data-bind="text: major"></div>
+								<div class="minor-info" data-bind="text: minor"></div>
 							</div>
-							<div class="standing-info"data-bind="text: standing"></div>
-							<div class="major-info" data-bind="text: major"></div>
-							<div class="minor-info" data-bind="text: minor"></div>
 						</div>
-                    </div>
-            </div>
-            </div>
+				</div>
+				</div>
 
+			</div>
 		</div>
 
-            <div class="swipe-button">
-                <a href="/Website/swipe/"><img src="/Website/img/swipe.png" alt="swbtn" width="50" height="50"></a>
-            </div>
-
-
-            <footer>
-			    <p>&copy; 2015 Company, Inc.</p>
-		    </footer>
+		<div class="swipe-button">
+			<a href="/Website/swipe/"><img src="/Website/img/swipe.png" alt="swbtn" width="50" height="50"></a>
 		</div>
+
+
+		<footer>
+			<p>&copy; 2015 Company, Inc.</p>
+		</footer>
 
 		<script type="text/javascript" src="/Website/scripts/libs/jquery.transform2d.js"></script>
 		<script type="text/javascript" src="/Website/scripts/libs/jquery.jTinder.js"></script>

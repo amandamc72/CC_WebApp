@@ -23,16 +23,16 @@ $(function() {
              */
             $("#tinderslide").jTinder({
                 onDislike: function (item) {
-                    console.log('Dislike image ' + (item.index()+1));
-                    var target = listviewVM.items(item.index()+1);
-                    console.log(target);
-                    //swipeRequest('left', target);
+                    console.log('Dislike at index ' + (item.index()));
+                    var target = listviewVM.items()[item.index()];
+                    console.log(target.memberId);
+                    swipeRequest('left', target.memberId);
                 },
                 onLike: function (item) {
-                    console.log('Like image ' + (item.index()+1));
-                    var target = listviewVM(item.index()+1);
-                    console.log(target);
-                   // swipeRequest('right', target);
+                    console.log('Like at index ' + (item.index()));
+                    var target = listviewVM.items()[item.index()];
+                    console.log(target.memberId);
+                    swipeRequest('right', target.memberId);
                 },
                 animationRevertSpeed: 200,
                 animationSpeed: 400,
@@ -66,9 +66,8 @@ function swipeRequest(swipeType, who) {
         success: function (data) {
             console.log(data);
             if(data.match){
-                conole.log("Its a match");
+                console.log("Its a match");
                 //show match modal
-                th
             }
             else{
                 console.log("No match");
